@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="startPane" maxHeight="400.0" maxWidth="532.0" minHeight="400.0" minWidth="532.0" prefHeight="400.0" prefWidth="532.0" stylesheets="@startScreen.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.startController">
+   <children>
+      <Button fx:id="loginButton" layoutX="160.0" layoutY="156.0" mnemonicParsing="false" onAction="#loginButtonClicked" prefHeight="31.0" prefWidth="212.0" text="Login" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="156.0" />
+      <Button fx:id="registerButton" layoutX="160.0" layoutY="200.0" mnemonicParsing="false" onAction="#registerButtonClicked" prefHeight="31.0" prefWidth="212.0" text="Register" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="200.0" />
+      <Label fx:id="title" alignment="CENTER" layoutX="220.0" layoutY="87.0" text="Books System" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="87.0" />
+   </children>
+</AnchorPane>
