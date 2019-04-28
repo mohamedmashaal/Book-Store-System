@@ -28,7 +28,17 @@ public class startController {
 
     @FXML
     void loginButtonClicked(ActionEvent event){
-
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("views/loginScreen.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle(Screens.LOGIN_SCREEN);
+            stage.setScene(new Scene(root));
+            stage.show();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch the Log in window.");
+        }
     }
 
     @FXML

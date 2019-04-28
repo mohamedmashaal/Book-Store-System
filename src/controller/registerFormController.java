@@ -59,7 +59,7 @@ public class registerFormController {
     @FXML
     void registerButtonClicked(ActionEvent event){
         resetErrorLabel();
-        if(checkNonEmptyFeilds()){
+        if(checkNonEmptyFields()){
             if(checkMatchingPassword()){
                 if(!userExist()){
                     fillFields();
@@ -123,7 +123,7 @@ public class registerFormController {
         return false;
     }
 
-    private boolean checkNonEmptyFeilds() {
+    private boolean checkNonEmptyFields() {
         if(userNameField.getText() == null || userNameField.getText() == ""){
             return false;
         }

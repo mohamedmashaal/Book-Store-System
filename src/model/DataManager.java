@@ -100,4 +100,20 @@ public class DataManager {
             return false;
         }
     }
+
+    public String getUserHashedPassword(String userName){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_PASSWORD);
+            preparedStatement.setString(1, userName);
+            resultSet = preparedStatement.executeQuery();
+            String password = "";
+            while(resultSet.next()){
+                password = resultSet.getString(DBContract.User.PASSWORD_COLUMN);
+            }
+            return password;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }
