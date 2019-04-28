@@ -2,6 +2,9 @@ package contracts;
 
 public class DBContract {
     // will be used to specify the relations and attributes as constants to achieve minimum decoupling
+    public static final String DB_USERNAME = "example";
+    public static final String DB_PASSWORD = "example";
+
     public static final String DB_NAME = "book_store";
 
     public static final String USER_TABLE = "USER";

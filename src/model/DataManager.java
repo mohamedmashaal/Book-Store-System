@@ -18,7 +18,7 @@ public class DataManager {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Setup the connection with the DB
             connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/book_store", "example","example");
+                    .getConnection("jdbc:mysql://localhost/" + DBContract.DB_NAME, DBContract.DB_USERNAME,DBContract.DB_PASSWORD);
             System.out.print(connect);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
