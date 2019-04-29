@@ -22,7 +22,8 @@ public class startController {
     @FXML
     private Label title;
 
-    public void initialize(){
+    @FXML
+    private void initialize(){
 
     }
 

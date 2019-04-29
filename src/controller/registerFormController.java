@@ -52,7 +52,8 @@ public class registerFormController {
     private String hashedPassword;
     private String credential;
 
-    public void initialize(){
+    @FXML
+    private void initialize(){
 
     }
 

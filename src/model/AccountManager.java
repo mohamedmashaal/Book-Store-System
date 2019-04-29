@@ -1,5 +1,10 @@
 package model;
 
+import contracts.DBContract;
+import contracts.Users;
+
+import java.util.HashMap;
+
 public class AccountManager {
     private static AccountManager uniqueInstance;
     private Customer currentUser;
@@ -24,7 +29,20 @@ public class AccountManager {
         return isActive;
     }
 
-    public boolean login(String userName, int hashedPassword){
-        return false;
+    public Customer login(String userName){
+        DataManager manager = DataManager.getInstance();
+        HashMap<String, String> userData = manager.getUser(userName);
+        Customer customer = UserFactory.getCustomer(userData);
+        isActive = true;
+        currentUser = customer;
+        return customer;
+    }
+
+    public boolean logout(Customer customer){
+        return true;
+    }
+
+    public Customer getCurrentUser(){
+        return currentUser;
     }
 }

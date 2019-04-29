@@ -1,7 +1,9 @@
 package controller;
 
 import contracts.Colors;
+import contracts.DBContract;
 import contracts.Screens;
+import contracts.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.AccountManager;
+import model.Customer;
 import model.DataManager;
 import utils.SecurityManager;
 
@@ -30,7 +34,8 @@ public class loginController {
     private String userName;
     private String password;
 
-    public void initialize(){
+    @FXML
+    private void initialize(){
 
     }
 
@@ -41,11 +46,22 @@ public class loginController {
             fillFields();
             DataManager manager = DataManager.getInstance();
             if(manager.searchForUser(userName)){
+                AccountManager accountManager = AccountManager.getManager();
                 String hashedPassword = manager.getUserHashedPassword(userName);
                 String currentEnteredPasswordHash = SecurityManager.getInstance().getHashedPassword(password);
                 if(hashedPassword.equals(currentEnteredPasswordHash)){
-                    setErrorLabel("Login in Successful");
+                    Customer customer = accountManager.login(userName);
+                    if(customer.getCredential().equalsIgnoreCase(Users.CUSTOMER)){
+                        startScreen(Screens.CUSTOMER_SCREEN);
+                    }
+                    else if(customer.getCredential().equalsIgnoreCase(Users.MANAGER)){
+                        startScreen(Screens.MANAGER_SCREEN);
+                    }
+                    else{
+                        startScreen(Screens.MANAGER_SCREEN);
+                    }
                 }
+
                 else{
                     setErrorLabel("Wrong Password");
                 }
@@ -53,6 +69,28 @@ public class loginController {
             else{
                 setErrorLabel("User not found");
             }
+        }
+    }
+
+    private void startScreen(String screen) {
+        Parent root;
+        try {
+            if(screen.equalsIgnoreCase(Screens.CUSTOMER_SCREEN)) {
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("views/customerScreen.fxml"));
+            }
+            else if(screen.equalsIgnoreCase(Screens.MANAGER_SCREEN)){
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("views/managerScreen.fxml"));
+            }
+            else{
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("views/managerScreen.fxml"));
+            }
+            Stage stage = new Stage();
+            stage.setTitle(screen);
+            stage.setScene(new Scene(root));
+            stage.show();
+            cancelButton.getScene().getWindow().hide();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch customer or manager Screen");
         }
     }
 

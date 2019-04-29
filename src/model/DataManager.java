@@ -5,6 +5,7 @@ import contracts.SqlCommands;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DataManager {
     private Connection connect = null;
@@ -19,7 +20,6 @@ public class DataManager {
             // Setup the connection with the DB
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/" + DBContract.DB_NAME, DBContract.DB_USERNAME,DBContract.DB_PASSWORD);
-            System.out.print(connect);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException e){
@@ -114,6 +114,29 @@ public class DataManager {
         } catch (SQLException e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    public HashMap<String, String> getUser(String userName) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_USER);
+            preparedStatement.setString(1, userName);
+            resultSet = preparedStatement.executeQuery();
+            HashMap <String, String> userData = new HashMap<>();
+            while(resultSet.next()){
+                userData.put(DBContract.User.USER_NAME_COLUMN, resultSet.getString(DBContract.User.USER_NAME_COLUMN));
+                userData.put(DBContract.User.PASSWORD_COLUMN, resultSet.getString(DBContract.User.PASSWORD_COLUMN));
+                userData.put(DBContract.User.FIRST_NAME_COLUMN, resultSet.getString(DBContract.User.FIRST_NAME_COLUMN));
+                userData.put(DBContract.User.LAST_NAME_COLUMN, resultSet.getString(DBContract.User.LAST_NAME_COLUMN));
+                userData.put(DBContract.User.ADDRESS_COLUMN, resultSet.getString(DBContract.User.ADDRESS_COLUMN));
+                userData.put(DBContract.User.PHONE_COLUMN, resultSet.getString(DBContract.User.PHONE_COLUMN));
+                userData.put(DBContract.User.CREDENTIAL_COLUMN, resultSet.getString(DBContract.User.CREDENTIAL_COLUMN));
+                userData.put(DBContract.User.EMAIL_COLUMN, resultSet.getString(DBContract.User.EMAIL_COLUMN));
+            }
+            return userData;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new HashMap<>();
         }
     }
 }
