@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController">
    <children>
-      <Label fx:id="testLabel" layoutX="283.0" layoutY="190.0" />
+      <Label fx:id="testLabel" layoutX="14.0" layoutY="369.0" prefHeight="17.0" prefWidth="102.0" />
+      <TableView fx:id="DataTable" prefHeight="202.0" prefWidth="477.0" />
+      <Button fx:id="SearchButton" layoutX="508.0" layoutY="330.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="79.0" text="Search" />
+      <TextField fx:id="CategoryField" layoutX="25.0" layoutY="286.0" promptText="Category" />
+      <TextField fx:id="AvailableQuantityField" layoutX="192.0" layoutY="286.0" promptText="Available Quantity" />
+      <TextField fx:id="SellingPriceField" layoutX="192.0" layoutY="246.0" promptText="Selling Price" />
+      <TextField fx:id="PublicationYearField" layoutX="192.0" layoutY="209.0" promptText="Publication Year" />
+      <TextField fx:id="TitleField" layoutX="25.0" layoutY="246.0" promptText="Title" />
+      <TextField fx:id="ISBNField" layoutX="25.0" layoutY="209.0" promptText="ISBN" />
+      <TextField fx:id="AuthorNameField" layoutX="359.0" layoutY="286.0" promptText="Author Name" />
+      <TextField fx:id="DefaultOrderField" layoutX="359.0" layoutY="246.0" promptText="Default Order" />
+      <TextField fx:id="ThresholdField" layoutX="359.0" layoutY="209.0" promptText="Threshold" />
    </children>
 </AnchorPane>

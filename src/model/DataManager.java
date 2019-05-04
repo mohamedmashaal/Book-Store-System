@@ -139,4 +139,40 @@ public class DataManager {
             return new HashMap<>();
         }
     }
+    public ResultSet getAllBook(){
+        try {
+            preparedStatement = connect.prepareStatement("select * from book");
+            resultSet = preparedStatement.executeQuery();
+            return resultSet;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public ResultSet searchForBook(ArrayList<String> searchParameters) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.Search_For_Book);
+            int index = 1;
+            for(int i = 0; i < searchParameters.size(); i++){
+                preparedStatement.setString(index++, searchParameters.get(i));
+                preparedStatement.setString(index++, searchParameters.get(i));
+
+            }
+            return preparedStatement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+
+
+
+
+
+
+
+
+    }
 }

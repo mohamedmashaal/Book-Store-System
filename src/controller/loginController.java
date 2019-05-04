@@ -36,7 +36,8 @@ public class loginController {
 
     @FXML
     private void initialize(){
-
+        userNameField.setText("shazly");
+        passwordField.setText("1234");
     }
 
     @FXML
@@ -74,6 +75,7 @@ public class loginController {
 
     private void startScreen(String screen) {
         Parent root;
+
         try {
             if(screen.equalsIgnoreCase(Screens.CUSTOMER_SCREEN)) {
                 root = FXMLLoader.load(getClass().getClassLoader().getResource("views/customerScreen.fxml"));
