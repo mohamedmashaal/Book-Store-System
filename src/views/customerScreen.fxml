@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController">
    <children>
       <Label fx:id="testLabel" layoutX="14.0" layoutY="561.0" prefHeight="25.0" prefWidth="102.0">
          <font>
@@ -25,8 +25,8 @@
       <TextField fx:id="AuthorNameField" layoutX="348.0" layoutY="333.0" promptText="Author Name" />
       <TextField fx:id="DefaultOrderField" layoutX="348.0" layoutY="293.0" promptText="Default Order" />
       <TextField fx:id="ThresholdField" layoutX="348.0" layoutY="256.0" promptText="Threshold" />
-      <VBox fx:id="Card" layoutX="588.0" layoutY="19.0" prefHeight="376.0" prefWidth="589.0" stylesheets="@HBox.css" />
-      <TextField fx:id="QuantityField" layoutX="726.0" layoutY="458.0" promptText="Quantity" />
-      <Button fx:id="CheckOutButton" layoutX="627.0" layoutY="458.0" mnemonicParsing="false" onAction="#addToCart" text="Add To Cart" />
+      <VBox fx:id="Card" layoutX="580.0" layoutY="26.0" prefHeight="355.0" prefWidth="411.0" stylesheets="@HBox.css" />
+      <TextField fx:id="QuantityField" layoutX="315.0" layoutY="443.0" promptText="Quantity" />
+      <Button fx:id="CheckOutButton" layoutX="216.0" layoutY="443.0" mnemonicParsing="false" onAction="#addToCart" text="Add To Cart" />
    </children>
 </AnchorPane>
