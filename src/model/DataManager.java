@@ -249,13 +249,12 @@ public class DataManager {
             }
             connect.commit();
         } catch (SQLException e) {
-            if (connect != null) {
                 try {
                     System.err.print("Transaction is being rolled back");
                     connect.rollback();
                 } catch (SQLException excep) {
                 }
-            }
+
         } finally {
             try {
                 connect.setAutoCommit(true);
