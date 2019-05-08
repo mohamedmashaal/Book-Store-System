@@ -6,7 +6,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Book;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,11 +15,12 @@ public class CardController {
     private  ArrayList<String> selectedRow;
     private Book book;
 
-    HashMap<Book, Integer> bookQuantity = new HashMap<>();
-    HashMap<Book, HBox> bookHBoxHashMap = new HashMap<>();
-    HashMap<Button, Book> increaseBook = new HashMap<>();
-    HashMap<Button, Book> decreaseBook = new HashMap<>();
-    HashMap<Button, Book> removeBook = new HashMap<>();
+    static HashMap<Book, Integer> bookQuantityHashMap = new HashMap<>();
+    static HashMap<Book, HBox> bookHBoxHashMap = new HashMap<>();
+    static HashMap<Button, Book> increaseBookHashMap = new HashMap<>();
+    static HashMap<Button, Book> decreaseBookHashMap = new HashMap<>();
+    static HashMap<Button, Book> removeBookHashMap = new HashMap<>();
+    static HashMap<String, Book> isbnBookHashMap = new HashMap<>();
 
 
     public CardController(final VBox cart, final String quantity, final ArrayList<String> selectedRow) {
@@ -28,15 +28,23 @@ public class CardController {
         this.quantity = Integer.valueOf(quantity);
         this.selectedRow = selectedRow;
         book = new Book(selectedRow);
-        bookQuantity.put(book, this.quantity);
+        bookQuantityHashMap.put(book, this.quantity);
     }
 
-
-    public void checkOut() {
-
-    }
 
     public void addToCard() {
+
+        if(isbnBookHashMap.containsKey(book.getIsbn())){
+            book = isbnBookHashMap.get(book.getIsbn());
+            ((Label)(bookHBoxHashMap.get(book).getChildren().get(5))).setText(String.valueOf(this.quantity));
+            ((Label)(bookHBoxHashMap.get(book).getChildren().get(7))).setText(String.valueOf(Double.valueOf(book.getSellingPrice()) * this.quantity));
+            bookQuantityHashMap.put(book, this.quantity);
+            if(this.quantity <= 0){
+                removeOrder(book);
+            }
+            return;
+        }
+
         HBox hbox = new HBox();
 
         Button increase = new Button();
@@ -79,14 +87,18 @@ public class CardController {
         hbox.getChildren().add(bookPirce);
         hbox.getChildren().add(totalPrice);
 
-        increaseBook.put(increase, book);
-        decreaseBook.put(decrease, book);
-        removeBook.put(remove, book);
+        increaseBookHashMap.put(increase, book);
+        decreaseBookHashMap.put(decrease, book);
+        removeBookHashMap.put(remove, book);
         bookHBoxHashMap.put(book, hbox);
-        increase.setOnAction(e -> increaseOrder(increaseBook.get(increase)));
-        decrease.setOnAction(e -> decreaseOrder(decreaseBook.get(decrease)));
-        remove.setOnAction(e -> removeOrder(removeBook.get(remove)));
+        increase.setOnAction(e -> increaseOrder(increaseBookHashMap.get(increase)));
+        decrease.setOnAction(e -> decreaseOrder(decreaseBookHashMap.get(decrease)));
+        remove.setOnAction(e -> removeOrder(removeBookHashMap.get(remove)));
         card.getChildren().add(hbox);
+        isbnBookHashMap.put(book.getIsbn(), book);
+        if(Double.valueOf(quantityString.getText()) <= 0){
+            removeOrder(book);
+        }
     }
 
 
@@ -98,12 +110,13 @@ public class CardController {
             }
         }
         bookHBoxHashMap.remove(book);
-        bookQuantity.remove(book);
+        bookQuantityHashMap.remove(book);
+        isbnBookHashMap.remove(book.getIsbn());
     }
 
 
     private void increaseOrder(Book book) {
-        bookQuantity.put(book, bookQuantity.get(book) + 1);
+        bookQuantityHashMap.put(book, bookQuantityHashMap.get(book) + 1);
         HBox hBox = bookHBoxHashMap.get(book);
         Label quantityString  = (Label) hBox.getChildren().get(5);
         quantityString.setText(String.valueOf(Double.valueOf(quantityString.getText()) + 1));
@@ -113,11 +126,14 @@ public class CardController {
 
 
     private void decreaseOrder(Book book) {
-        bookQuantity.put(book, bookQuantity.get(book) - 1);
+        bookQuantityHashMap.put(book, bookQuantityHashMap.get(book) - 1);
         HBox hBox = bookHBoxHashMap.get(book);
         Label quantityString  = (Label) hBox.getChildren().get(5);
         quantityString.setText(String.valueOf(Double.valueOf(quantityString.getText()) - 1));
         Label totalPrice  = (Label) hBox.getChildren().get(7);
         totalPrice.setText(String.valueOf(Double.valueOf(book.getSellingPrice()) * Double.valueOf(quantityString.getText()) - 1));
+        if(Double.valueOf(quantityString.getText()) <= 0){
+            removeOrder(book);
+        }
     }
 }
