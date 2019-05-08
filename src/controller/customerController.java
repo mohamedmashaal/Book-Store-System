@@ -52,7 +52,7 @@ public class customerController {
         TitleField.setText("bad book");
         showDatainTableView(resultSet);
         ExpireDateField.setText("2006-05-03");
-        
+
     }
     private void showDatainTableView(ResultSet resultSet) throws SQLException {
         lastResultSet = resultSet;

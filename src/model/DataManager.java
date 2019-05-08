@@ -227,6 +227,7 @@ public class DataManager {
         }
     }
 
+
     public void insertPurchase(ArrayList<String> parameters, HashMap<Book, Integer> orders) {
         try {
             connect.setAutoCommit(false);
@@ -249,11 +250,11 @@ public class DataManager {
             }
             connect.commit();
         } catch (SQLException e) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    connect.rollback();
-                } catch (SQLException excep) {
-                }
+            try {
+                System.err.print("Transaction is being rolled back");
+                connect.rollback();
+            } catch (SQLException excep) {
+            }
 
         } finally {
             try {
@@ -261,6 +262,18 @@ public class DataManager {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+
+    public ResultSet getBook(String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_BOOK);
+            preparedStatement.setString(1, isbn);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
