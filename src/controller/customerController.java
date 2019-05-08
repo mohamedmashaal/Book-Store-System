@@ -1,10 +1,8 @@
 package controller;
 
-import contracts.Screens;
 import contracts.Users;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +28,7 @@ public class customerController {
     public TextField PublicationYearField;
     public TextField ISBNField;
     public TextField AuthorNameField;
-    public TextField DefaultOrderField;
+    public TextField PublisherName;
     public TextField ThresholdField;
     public TableView DataTable;
     public TextField QuantityField;
@@ -95,7 +93,7 @@ public class customerController {
         searchParametes.add(SellingPriceField.getText());
         searchParametes.add(AvailableQuantityField.getText());
         searchParametes.add(ThresholdField.getText());
-        searchParametes.add(DefaultOrderField.getText());
+        searchParametes.add(PublisherName.getText());
         searchParametes.add(AuthorNameField.getText());
 
         ResultSet resultSet = DataManager.getInstance().searchForBook(searchParametes);
