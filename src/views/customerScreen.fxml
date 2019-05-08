@@ -17,13 +17,13 @@
       <TableView fx:id="DataTable" prefHeight="225.0" prefWidth="567.0" />
       <Button fx:id="SearchButton" layoutX="216.0" layoutY="393.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="79.0" text="Search" />
       <TextField fx:id="CategoryField" layoutX="14.0" layoutY="333.0" promptText="Category" />
-      <TextField fx:id="AvailableQuantityField" layoutX="181.0" layoutY="333.0" promptText="Available Quantity" />
+      <TextField fx:id="AvailableQuantityField" layoutX="181.0" layoutY="333.0" promptText="Publisher Name" />
       <TextField fx:id="SellingPriceField" layoutX="181.0" layoutY="293.0" promptText="Selling Price" />
       <TextField fx:id="PublicationYearField" layoutX="181.0" layoutY="256.0" promptText="Publication Year" />
       <TextField fx:id="TitleField" layoutX="14.0" layoutY="293.0" promptText="Title" />
       <TextField fx:id="ISBNField" layoutX="14.0" layoutY="256.0" promptText="ISBN" />
       <TextField fx:id="AuthorNameField" layoutX="348.0" layoutY="333.0" promptText="Author Name" />
-      <TextField fx:id="DefaultOrderField" layoutX="348.0" layoutY="293.0" promptText="Default Order" />
+      <TextField fx:id="PublisherName" layoutX="348.0" layoutY="293.0" promptText="Default Order" />
       <TextField fx:id="ThresholdField" layoutX="348.0" layoutY="256.0" promptText="Threshold" />
       <VBox fx:id="Card" layoutX="580.0" layoutY="26.0" prefHeight="355.0" prefWidth="411.0" stylesheets="@HBox.css" />
       <TextField fx:id="QuantityField" layoutX="315.0" layoutY="443.0" promptText="Quantity" />

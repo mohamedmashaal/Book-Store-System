@@ -157,24 +157,14 @@ public class DataManager {
             for(int i = 0; i < searchParameters.size(); i++){
                 preparedStatement.setString(index++, searchParameters.get(i));
                 preparedStatement.setString(index++, searchParameters.get(i));
-
             }
+            int x = 0;
             return preparedStatement.executeQuery();
 
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-
-
-
-
-
-
-
-
-
-
     }
 
     public boolean insertBook(Book book) {
