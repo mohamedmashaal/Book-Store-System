@@ -11,8 +11,10 @@ public class DBContract {
     public static final String AUTHOR_TABLE = "AUTHOR";
     public static final String BOOK_TABLE = "BOOK";
     public static final String ORDER_TABLE = "ORDER";
+    public static final String ORDER_DETAIL_TABLE = "ORDER_DETAIL";
     public static final String PUBLISHER_TABLE = "PUBLISHER";
     public static final String PURCHASE_TABLE = "PURCHASE";
+    public static final String PURCHASE_DETAIL_TABLE = "PURCHASE_DETAIL";
 
     public static class User{
         public static final String USER_NAME_COLUMN = "user_name";
@@ -36,24 +38,34 @@ public class DBContract {
         public static final String SELLING_PRICE_COLUMN = "selling_price";
         public static final String AVAILABLE_COLUMN = "available_quantity";
         public static final String THRESHOLD_COLUMN = "threshold";
-        public static final String DEFAULT_ORDER_QUANTITY = "default_order";
+        public static final String PUBLISHER_NAME_COLUMN  = "publisher_name";
     }
     public static class Order{
         public static final String ORDER_ID_COLUMN = "order_id";
         public static final String USER_NAME_COLUMN = "user_name";
         public static final String ORDER_TIME_COLUMN = "order_time";
+    }
+    public static class OrderDetail{
+        public static final String ORDER_ID_COLUMN = "order_id";
         public static final String QUANTITY_COLUMN = "quantity";
         public static final String BOOK_ISBN_COLUMN = "book_isbn";
     }
+
     public static class Purchase{
         public static final String PURCHASE_ID_COLUMN = "purchase_id";
         public static final String USER_NAME_COLUMN = "user_name";
-        public static final String purchase_TIME_COLUMN = "purchase_time";
+        public static final String PURCHASE_TIME_COLUMN = "purchase_time";
+        public static final String CREDIT_CARD_NUMBER_COLUMN = "credit_card";
+        public static final String CREDIT_CARD_CVV_COLUMN = "credit_card_cvv";
+        public static final String CREDIT_CARD_EXPIRATION_COLUMN = "credit_card_expiration";
+    }
+    public static class PurchaseDetail{
+        public static final String PURCHASE_ID_COLUMN = "purchase_id";
         public static final String QUANTITY_COLUMN = "quantity";
         public static final String BOOK_ISBN_COLUMN = "book_isbn";
     }
+
     public static class Publisher{
-        public static final String ISBN_COLUMN = "isbn";
         public static final String NAME_COLUMN = "name";
         public static final String ADDRESS_COLUMN = "address";
         public static final String PHONE_COLUMN = "phone";
