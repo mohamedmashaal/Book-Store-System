@@ -232,4 +232,15 @@ public class DataManager {
             return false;
         }
     }
+
+    public ResultSet getBook(String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_BOOK);
+            preparedStatement.setString(1, isbn);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

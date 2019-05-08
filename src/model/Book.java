@@ -73,4 +73,18 @@ public class Book {
     public String getThreshold() {
         return threshold;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", sellingPrice='" + sellingPrice + '\'' +
+                ", category='" + category + '\'' +
+                ", year='" + year + '\'' +
+                ", availQuantity='" + availQuantity + '\'' +
+                ", defaultOrder='" + defaultOrder + '\'' +
+                ", threshold='" + threshold + '\'' +
+                '}';
+    }
 }
