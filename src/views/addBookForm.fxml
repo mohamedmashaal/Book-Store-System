@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="420.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddBookFormController">
+    <Label layoutX="26.0" layoutY="35.0" text="ISBN" />
+    <TextField fx:id="isbnTextField" layoutX="150.0" layoutY="30.0" prefHeight="31.0" prefWidth="187.0" />
+    <Label layoutX="26.0" layoutY="75.0" text="Title" />
+    <TextField fx:id="titleTextField" layoutX="150.0" layoutY="70.0" prefHeight="31.0" prefWidth="187.0" />
+    <Label layoutX="26.0" layoutY="115.0" text="Category" />
+    <ChoiceBox fx:id="categoryChoice" layoutX="150.0" layoutY="110.0" prefHeight="31.0" prefWidth="187.0" value="Science">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Science" />
+                <String fx:value="Art" />
+                <String fx:value="Religion" />
+                <String fx:value="History" />
+                <String fx:value="Geography" />
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+    <Label layoutX="26.0" layoutY="155.0" text="Year" />
+    <TextField fx:id="yearTextField" layoutX="150.0" layoutY="150.0" prefHeight="31.0" prefWidth="187.0" />
+    <Label layoutX="26.0" layoutY="195.0" text="Price" />
+    <TextField fx:id="priceTextField" layoutX="150.0" layoutY="190.0" prefHeight="31.0" prefWidth="187.0" />
+    <Label layoutX="26.0" layoutY="235.0" text="Avail. Quantity" />
+    <TextField fx:id="availQtyTextField" layoutX="150.0" layoutY="230.0" prefHeight="31.0" prefWidth="187.0" />
+    <Label layoutX="26.0" layoutY="275.0" text="Threshold" />
+    <TextField fx:id="thresholdTextField" layoutX="150.0" layoutY="270.0" prefHeight="31.0" prefWidth="187.0" />
+    <Label layoutX="26.0" layoutY="315.0" text="Default Order" />
+    <TextField fx:id="defaultOrderTextField" layoutX="150.0" layoutY="310.0" prefHeight="31.0" prefWidth="187.0" />
+    <Button layoutX="26.0" layoutY="372.0" mnemonicParsing="false" onAction="#addBtnClicked" prefHeight="31.0" prefWidth="91.0" text="Add" />
+    <Label fx:id="addErrorLabel" layoutX="133.0" layoutY="377.0" prefHeight="21.0" prefWidth="209.0" />
+
+   <Label layoutX="361.0" layoutY="35.0" text="Authors (Comma Separated)" />
+   <TextField fx:id="authorsTextField" layoutX="570.0" layoutY="30.0" prefHeight="31.0" prefWidth="187.0" />
+   <Label layoutX="361.0" layoutY="75.0" text="Publisher Name" />
+   <TextField fx:id="publisherNameTextField" layoutX="570.0" layoutY="70.0" prefHeight="31.0" prefWidth="187.0" />
+   <Label layoutX="361.0" layoutY="115.0" text="Publisher Address" />
+   <TextField fx:id="publisherAddressTextField" layoutX="570.0" layoutY="110.0" prefHeight="31.0" prefWidth="187.0" />
+   <Label layoutX="361.0" layoutY="155.0" text="Publisher Phnoe" />
+   <TextField fx:id="publisherPhoneTextField" layoutX="570.0" layoutY="150.0" prefHeight="31.0" prefWidth="187.0" />
+</AnchorPane>

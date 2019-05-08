@@ -18,5 +18,8 @@ public class SqlCommands {
             " and ( ? = '' OR b.default_order = ?)" +
             " and ( ? = '' OR a.author = ? )"+
             " and ( b.isbn = a.isbn )";
+    public static final String INSERT_BOOK = "INSERT INTO " + DBContract.BOOK_TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+    public static final String INSERT_AUTHOR = "INSERT INTO " + DBContract.AUTHOR_TABLE + " VALUES(?, ?);";
+    public static final String INSERT_PUBLISHER = "INSERT INTO " + DBContract.PUBLISHER_TABLE + " VALUES(?, ?, ?, ?);";
 }
 
