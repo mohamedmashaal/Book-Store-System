@@ -1,5 +1,6 @@
 package model;
 
+import com.mysql.cj.xdevapi.SqlStatement;
 import contracts.DBContract;
 import contracts.SqlCommands;
 
@@ -174,5 +175,61 @@ public class DataManager {
 
 
 
+    }
+
+    public boolean insertBook(Book book) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.INSERT_BOOK);
+            preparedStatement.setString(1, book.getIsbn());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(3, book.getCategory());
+            preparedStatement.setString(4, book.getYear());
+            preparedStatement.setString(5, book.getSellingPrice());
+            preparedStatement.setString(6, book.getAvailQuantity());
+            preparedStatement.setString(7, book.getThreshold());
+            preparedStatement.setString(8, book.getDefaultOrder());
+            int cnt  = preparedStatement.executeUpdate();
+            if(cnt == 1){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean insertAuthor(Author author, String isbn){
+        try{
+            preparedStatement = connect.prepareStatement(SqlCommands.INSERT_AUTHOR);
+            preparedStatement.setString(1, isbn);
+            preparedStatement.setString(2, author.getName());
+            int cnt  = preparedStatement.executeUpdate();
+            if(cnt == 1){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean insertPublisher(Publisher publisher, String isbn){
+        try{
+            preparedStatement = connect.prepareStatement(SqlCommands.INSERT_PUBLISHER);
+            preparedStatement.setString(1, isbn);
+            preparedStatement.setString(2, publisher.getName());
+            preparedStatement.setString(3, publisher.getAddress());
+            preparedStatement.setString(4, publisher.getPhone());
+            int cnt  = preparedStatement.executeUpdate();
+            if(cnt == 1){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

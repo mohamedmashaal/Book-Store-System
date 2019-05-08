@@ -56,10 +56,10 @@ public class loginController {
                         startScreen(Screens.CUSTOMER_SCREEN);
                     }
                     else if(customer.getCredential().equalsIgnoreCase(Users.MANAGER)){
-                        startScreen(Screens.MANAGER_SCREEN);
+                        startScreen(Screens.CUSTOMER_SCREEN); // here
                     }
                     else{
-                        startScreen(Screens.MANAGER_SCREEN);
+                        startScreen(Screens.CUSTOMER_SCREEN); // here
                     }
                 }
 

@@ -28,5 +28,7 @@
       <VBox fx:id="Card" layoutX="580.0" layoutY="26.0" prefHeight="355.0" prefWidth="411.0" stylesheets="@HBox.css" />
       <TextField fx:id="QuantityField" layoutX="315.0" layoutY="443.0" promptText="Quantity" />
       <Button fx:id="CheckOutButton" layoutX="216.0" layoutY="443.0" mnemonicParsing="false" onAction="#addToCart" text="Add To Cart" />
+      <Button fx:id="controlPanelButton" layoutX="855.0" layoutY="546.0" mnemonicParsing="false" onAction="#openControlPanel" text="Control Panel" />
+      <Label fx:id="controlPanelErrorLabel" layoutX="609.0" layoutY="551.0" prefHeight="21.0" prefWidth="236.0" />
    </children>
 </AnchorPane>

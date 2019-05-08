@@ -1,13 +1,20 @@
 package controller;
 
+import contracts.Screens;
+import contracts.Users;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.AccountManager;
+import model.Customer;
 import model.DataManager;
 
 import java.sql.ResultSet;
@@ -29,6 +36,8 @@ public class customerController {
     public TextField QuantityField;
     public VBox Card;
     public Button CheckOutButton;
+    public Button controlPanelButton;
+    public Label controlPanelErrorLabel;
     @FXML
     private Label testLabel;
 
@@ -99,5 +108,31 @@ public class customerController {
         ArrayList<String> selectedRow = (ArrayList<String>) DataTable.getSelectionModel().getSelectedItem();
         CardController card = new CardController(this.Card, QuantityField.getText(), selectedRow);
         card.addToCard();
+    }
+
+    public void openControlPanel(){
+        Customer customer = AccountManager.getManager().getCurrentUser();
+        if(customer.getCredential().equalsIgnoreCase(Users.CUSTOMER)){
+            controlPanelErrorLabel.setText("You don't have enough credentials");
+        }
+        else{
+            controlPanelErrorLabel.setText("Welcome back!");
+            startManagerScreen();
+        }
+    }
+
+    private void startManagerScreen() {
+        Parent root;
+
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("views/managerScreen.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Manager's Control Panel");
+            stage.setScene(new Scene(root));
+            stage.show();
+            //controlPanelButton.getScene().getWindow().hide();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch manager Screen");
+        }
     }
 }
