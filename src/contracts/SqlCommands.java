@@ -20,5 +20,6 @@ public class SqlCommands {
     public static final String INSERT_BOOK = "INSERT INTO " + DBContract.BOOK_TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
     public static final String INSERT_AUTHOR = "INSERT INTO " + DBContract.AUTHOR_TABLE + " VALUES(?, ?);";
     public static final String INSERT_PUBLISHER = "INSERT INTO " + DBContract.PUBLISHER_TABLE + " VALUES(?, ?, ?, ?);";
+    public static final String GET_BOOK = "SELECT * FROM " + DBContract.BOOK_TABLE + " WHERE ISBN = ?;";
 }
 

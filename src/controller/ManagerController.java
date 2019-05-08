@@ -11,7 +11,7 @@ import model.AccountManager;
 
 import java.util.Objects;
 
-public class managerController {
+public class ManagerController {
     @FXML
     private Label welcomeLabel;
 
@@ -28,6 +28,21 @@ public class managerController {
             //controlPanelButton.getScene().getWindow().hide();
         }catch (java.io.IOException exception){
             System.out.println("Couldn't launch add book form Screen");
+        }
+    }
+
+    public void editBookClicked(ActionEvent actionEvent) {
+        Parent root;
+
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/editBookForm.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Edit Book Form");
+            stage.setScene(new Scene(root));
+            stage.show();
+            //controlPanelButton.getScene().getWindow().hide();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch edit book form Screen");
         }
     }
 }
