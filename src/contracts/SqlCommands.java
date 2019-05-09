@@ -7,7 +7,7 @@ public class SqlCommands {
             " FROM " + DBContract.USER_TABLE +" WHERE " +  DBContract.User.USER_NAME_COLUMN  + " = ?;";
     public static final String INSERT_USER = "INSERT INTO " + DBContract.USER_TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?);" ;
     public static final String GET_USER = "SELECT * FROM " + DBContract.USER_TABLE + " WHERE " + DBContract.User.USER_NAME_COLUMN + " = ?;";
-    public static final String Search_For_Book = "select b.isbn, title, category, publication_year, selling_price, available_quantity, threshold, publisher_name from book b left join author a on b.isbn = a.isbn where "+
+    public static final String Search_For_Book = "select b.isbn, title, category, publication_year, selling_price, available_quantity, threshold, publisher_name from book b where "+
             "( ? = '' OR b.isbn = ?)" +
             " and ( ? = '' OR b.title = ?)" +
             " and ( ? = '' OR b.category = ?)" +
@@ -16,7 +16,7 @@ public class SqlCommands {
             " and ( ? = '' OR b.available_quantity = ?)" +
             " and ( ? = '' OR b.threshold = ?)" +
             " and ( ? = '' OR b.publisher_name = ?)" +
-            " and ( ? = '' OR a.author = ? );";
+            " and ( ? = '' OR EXISTS (select * from author  where author.isbn = b.isbn and author.author = ?) );";
     public static final String INSERT_BOOK = "INSERT INTO " + DBContract.BOOK_TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
     public static final String INSERT_AUTHOR = "INSERT INTO " + DBContract.AUTHOR_TABLE + " VALUES(?, ?);";
     public static final String INSERT_PUBLISHER = "INSERT INTO " + DBContract.PUBLISHER_TABLE + " VALUES(?, ?, ?);";
@@ -43,9 +43,13 @@ public class SqlCommands {
             DBContract.Book.THRESHOLD_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String UPDATE_BOOK_PUBLISHER = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
             DBContract.Book.PUBLISHER_NAME_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+
+
     public static final String INSERT_PURCHASE = "INSERT INTO " + DBContract.PURCHASE_TABLE +" (user_name, purchase_time, credit_card, credit_card_cvv, credit_card_expiration) VALUES(?, ?, ?, ?, ?);";
     public static final String INSERT_PURCHASE_DETAILS = "INSERT INTO purchase_detail VALUES (?, ?, ?);";
     public static final String LAST_ID = "SELECT LAST_INSERT_ID() from " + DBContract.PURCHASE_TABLE + " ;";
+
+
     public static final String PROMOTE_USER = "UPDATE " + DBContract.USER_TABLE + " SET " +
             DBContract.User.CREDENTIAL_COLUMN + " = 'manager' WHERE " + DBContract.User.USER_NAME_COLUMN + " = ?;";
 }
