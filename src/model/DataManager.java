@@ -230,6 +230,8 @@ public class DataManager {
 
     public void insertPurchase(ArrayList<String> parameters, HashMap<Book, Integer> orders) {
         try {
+
+            connect.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             connect.setAutoCommit(false);
             PreparedStatement purchaseStatment = connect.prepareStatement(SqlCommands.INSERT_PURCHASE);
             PreparedStatement purchaseDetailsStatement = connect.prepareStatement(SqlCommands.INSERT_PURCHASE_DETAILS);
