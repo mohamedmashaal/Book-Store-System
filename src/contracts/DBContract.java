@@ -10,7 +10,7 @@ public class DBContract {
     public static final String USER_TABLE = "USER";
     public static final String AUTHOR_TABLE = "AUTHOR";
     public static final String BOOK_TABLE = "BOOK";
-    public static final String ORDER_TABLE = "ORDER";
+    public static final String ORDER_TABLE = "ORDERS";
     public static final String ORDER_DETAIL_TABLE = "ORDER_DETAIL";
     public static final String PUBLISHER_TABLE = "PUBLISHER";
     public static final String PURCHASE_TABLE = "PURCHASE";
