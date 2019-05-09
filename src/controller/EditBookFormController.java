@@ -25,18 +25,21 @@ public class EditBookFormController {
     public TextField publisherAddressTextField;
     public TextField publisherPhoneTextField;
     public TextField searchTextField;
-    public Label isbnLabel;
+    public TextField isbnTextField;
     public TextField titleTextField;
     public ChoiceBox categoryChoice;
 
     public void deleteBtnClicked() {
-        String isbn = isbnLabel.getText();
+        String isbn = isbnTextField.getText();
         if(DataManager.getInstance().deleteBook(isbn))
             System.out.println("Book Deleted!");
     }
 
     public void editBtnClicked() {
-        String isbn = isbnLabel.getText();
+        String isbn = isbnTextField.getText();
+
+        //delete authors
+        DataManager.getInstance().deleteAuthors(searchTextField.getText());
 
         //update publisher
         Publisher publisher = new Publisher(publisherNameTextField.getText(),
@@ -46,6 +49,7 @@ public class EditBookFormController {
             System.out.println("Publisher inserted!");
 
         //update book
+        DataManager.getInstance().updateBookISBN(isbnTextField.getText(), searchTextField.getText());
         DataManager.getInstance().updateBookTitle(titleTextField.getText(), isbn);
         DataManager.getInstance().updateBookYear(yearTextField.getText(), isbn);
         DataManager.getInstance().updateBookCategory(categoryChoice.getValue().toString(), isbn);
@@ -55,7 +59,6 @@ public class EditBookFormController {
         DataManager.getInstance().updateBookPublisherName(publisherNameTextField.getText(), isbn);
 
         //update authors
-        DataManager.getInstance().deleteAuthors(isbn);
         String[] authorNames = authorsTextField.getText().split(",");
         for(String authorName : authorNames){
             Author author = new Author(authorName);
@@ -66,7 +69,7 @@ public class EditBookFormController {
 
     public void searchBtnClicked() throws SQLException {
 
-        isbnLabel.setText("");
+        isbnTextField.setText("");
         titleTextField.setText("");
         yearTextField.setText("");
         categoryChoice.setValue("Science");
@@ -90,7 +93,7 @@ public class EditBookFormController {
                     bookResultSet.getString(7), bookResultSet.getString(8));
             System.out.println(book.toString());
 
-            isbnLabel.setText(book.getIsbn());
+            isbnTextField.setText(book.getIsbn());
             titleTextField.setText(book.getTitle());
             yearTextField.setText(book.getYear());
             categoryChoice.setValue(book.getCategory());

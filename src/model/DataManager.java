@@ -326,6 +326,20 @@ public class DataManager {
         }
     }
 
+    public boolean updateBookISBN(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_ISBN);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean updateBookTitle(String text, String isbn) {
         try {
             preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_TITLE);
@@ -415,6 +429,19 @@ public class DataManager {
             preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_PUBLISHER);
             preparedStatement.setString(1, text);
             preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean promoteUser(String username){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.PROMOTE_USER);
+            preparedStatement.setString(1, username);
             System.out.println(preparedStatement.toString());
             preparedStatement.executeUpdate();
             return true;

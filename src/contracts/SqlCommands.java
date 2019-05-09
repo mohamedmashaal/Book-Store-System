@@ -27,6 +27,8 @@ public class SqlCommands {
             " ? = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String DELETE_AUTHORS = "DELETE FROM " + DBContract.AUTHOR_TABLE + " WHERE " + DBContract.Author.ISBN_COLUMN + " = ?;";
     public static final String DELETE_BOOK = "DELETE FROM " + DBContract.BOOK_TABLE + " WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_ISBN = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.ISBN_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String UPDATE_BOOK_TITLE = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
             DBContract.Book.TITLE_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String UPDATE_BOOK_CATEGORY = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
@@ -44,5 +46,7 @@ public class SqlCommands {
     public static final String INSERT_PURCHASE = "INSERT INTO " + DBContract.PURCHASE_TABLE +" (user_name, purchase_time, credit_card, credit_card_cvv, credit_card_expiration) VALUES(?, ?, ?, ?, ?);";
     public static final String INSERT_PURCHASE_DETAILS = "INSERT INTO purchase_detail VALUES (?, ?, ?);";
     public static final String LAST_ID = "SELECT LAST_INSERT_ID() from " + DBContract.PURCHASE_TABLE + " ;";
+    public static final String PROMOTE_USER = "UPDATE " + DBContract.USER_TABLE + " SET " +
+            DBContract.User.CREDENTIAL_COLUMN + " = 'manager' WHERE " + DBContract.User.USER_NAME_COLUMN + " = ?;";
 }
 
