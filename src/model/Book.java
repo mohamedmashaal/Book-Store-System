@@ -9,7 +9,7 @@ public class Book {
     private String category;
     private String year;
     private String availQuantity;
-    private String defaultOrder;
+    private String publisherName;
     private String threshold;
 
 
@@ -43,14 +43,14 @@ public class Book {
         this.sellingPrice = selectedRow.get(4);
     }
 
-    public Book(String isbn, String title, String category, String year, String sellingPrice, String availQuantity, String threshold, String defaultOrder) {
+    public Book(String isbn, String title, String category, String year, String sellingPrice, String availQuantity, String threshold, String publisherName) {
         this.isbn = isbn;
         this.title = title;
         this.sellingPrice = sellingPrice;
         this.category = category;
         this.year = year;
         this.availQuantity = availQuantity;
-        this.defaultOrder = defaultOrder;
+        this.publisherName = publisherName;
         this.threshold = threshold;
     }
 
@@ -66,12 +66,13 @@ public class Book {
         return availQuantity;
     }
 
-    public String getDefaultOrder() {
-        return defaultOrder;
-    }
 
     public String getThreshold() {
         return threshold;
+    }
+
+    public String getPublisherName() {
+        return publisherName;
     }
 
     @Override
@@ -83,7 +84,7 @@ public class Book {
                 ", category='" + category + '\'' +
                 ", year='" + year + '\'' +
                 ", availQuantity='" + availQuantity + '\'' +
-                ", defaultOrder='" + defaultOrder + '\'' +
+                ", publisherName='" + publisherName + '\'' +
                 ", threshold='" + threshold + '\'' +
                 '}';
     }

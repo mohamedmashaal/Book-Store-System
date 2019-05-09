@@ -11,7 +11,6 @@
 
 <AnchorPane prefHeight="504.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditBookFormController">
     <Label layoutX="30.0" layoutY="111.0" text="ISBN" />
-    <TextField fx:id="isbnTextField" layoutX="154.0" layoutY="106.0" prefHeight="31.0" prefWidth="187.0" />
     <Label layoutX="30.0" layoutY="151.0" text="Title" />
     <TextField fx:id="titleTextField" layoutX="154.0" layoutY="146.0" prefHeight="31.0" prefWidth="187.0" />
     <Label layoutX="30.0" layoutY="191.0" text="Category" />
@@ -34,8 +33,6 @@
     <TextField fx:id="availQtyTextField" layoutX="154.0" layoutY="306.0" prefHeight="31.0" prefWidth="187.0" />
     <Label layoutX="30.0" layoutY="351.0" text="Threshold" />
     <TextField fx:id="thresholdTextField" layoutX="154.0" layoutY="346.0" prefHeight="31.0" prefWidth="187.0" />
-    <Label layoutX="30.0" layoutY="391.0" text="Default Order" />
-    <TextField fx:id="defaultOrderTextField" layoutX="154.0" layoutY="386.0" prefHeight="31.0" prefWidth="187.0" />
     <Button layoutX="30.0" layoutY="448.0" mnemonicParsing="false" onAction="#editBtnClicked" prefHeight="31.0" prefWidth="158.0" text="Apply Edits" />
     <Label fx:id="addErrorLabel" layoutX="137.0" layoutY="453.0" prefHeight="21.0" prefWidth="209.0" />
 
@@ -51,5 +48,6 @@
    <Label layoutX="255.0" layoutY="31.0" text="Search by ISBN" />
    <TextField fx:id="searchTextField" layoutX="379.0" layoutY="26.0" prefHeight="31.0" prefWidth="187.0" />
    <Button layoutX="603.0" layoutY="448.0" mnemonicParsing="false" onAction="#deleteBtnClicked" prefHeight="31.0" prefWidth="158.0" text="Delete Book" />
-   <Button layoutX="592.0" layoutY="26.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="158.0" onAction="#searchBtnClicked" text="Search" />
+   <Button layoutX="592.0" layoutY="26.0" mnemonicParsing="false" onAction="#searchBtnClicked" prefHeight="31.0" prefWidth="158.0" text="Search" />
+   <TextField fx:id="isbnTextField" layoutX="154.0" layoutY="106.0" prefHeight="31.0" prefWidth="187.0" />
 </AnchorPane>

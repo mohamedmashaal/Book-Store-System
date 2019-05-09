@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="268.0" prefWidth="401.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PromoteUserFormController">
+   <children>
+      <Label layoutX="20.0" layoutY="49.0" prefHeight="21.0" prefWidth="155.0" text="Search by user_name" />
+      <TextField onAction="#searchForUser" fx:id="userNameTextField" layoutX="195.0" layoutY="44.0" />
+      <Separator layoutX="101.0" layoutY="93.0" prefWidth="200.0" />
+      <Label layoutX="20.0" layoutY="114.0" text="First Name" />
+      <Label fx:id="firstNameLabel" layoutX="195.0" layoutY="114.0" prefHeight="21.0" prefWidth="187.0" />
+      <Label layoutX="20.0" layoutY="153.0" text="Last Name" />
+      <Label fx:id="lastNameLabel" layoutX="195.0" layoutY="153.0" prefHeight="21.0" prefWidth="187.0" />
+      <Button onAction="#promoteBtnClicked" layoutX="131.0" layoutY="201.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="139.0" text="Promote" />
+   </children>
+</AnchorPane>

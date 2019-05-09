@@ -45,4 +45,19 @@ public class ManagerController {
             System.out.println("Couldn't launch edit book form Screen");
         }
     }
+
+    public void promoteUserClicked(ActionEvent actionEvent) {
+        Parent root;
+
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/promoteUserForm.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Promote User Form");
+            stage.setScene(new Scene(root));
+            stage.show();
+            //controlPanelButton.getScene().getWindow().hide();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch promote user form Screen");
+        }
+    }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="420.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddBookFormController">
+<AnchorPane prefHeight="334.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddBookFormController">
     <Label layoutX="26.0" layoutY="35.0" text="ISBN" />
     <TextField fx:id="isbnTextField" layoutX="150.0" layoutY="30.0" prefHeight="31.0" prefWidth="187.0" />
     <Label layoutX="26.0" layoutY="75.0" text="Title" />
@@ -33,9 +33,7 @@
     <TextField fx:id="availQtyTextField" layoutX="150.0" layoutY="230.0" prefHeight="31.0" prefWidth="187.0" />
     <Label layoutX="26.0" layoutY="275.0" text="Threshold" />
     <TextField fx:id="thresholdTextField" layoutX="150.0" layoutY="270.0" prefHeight="31.0" prefWidth="187.0" />
-    <Label layoutX="26.0" layoutY="315.0" text="Default Order" />
-    <TextField fx:id="defaultOrderTextField" layoutX="150.0" layoutY="310.0" prefHeight="31.0" prefWidth="187.0" />
-    <Button layoutX="26.0" layoutY="372.0" mnemonicParsing="false" onAction="#addBtnClicked" prefHeight="31.0" prefWidth="91.0" text="Add" />
+    <Button layoutX="255.0" layoutY="346.0" mnemonicParsing="false" onAction="#addBtnClicked" prefHeight="31.0" prefWidth="282.0" text="Add" />
     <Label fx:id="addErrorLabel" layoutX="133.0" layoutY="377.0" prefHeight="21.0" prefWidth="209.0" />
 
    <Label layoutX="361.0" layoutY="35.0" text="Authors (Comma Separated)" />

@@ -36,6 +36,9 @@ public class customerController {
     public Button CheckOutButton;
     public Button controlPanelButton;
     public Label controlPanelErrorLabel;
+    public TextField CreditNumberField;
+    public TextField CVVField;
+    public TextField ExpireDateField;
     @FXML
     private Label testLabel;
 
@@ -48,6 +51,8 @@ public class customerController {
         ResultSet resultSet = DataManager.getInstance().getAllBook();
         TitleField.setText("bad book");
         showDatainTableView(resultSet);
+        ExpireDateField.setText("2006-05-03");
+
     }
     private void showDatainTableView(ResultSet resultSet) throws SQLException {
         lastResultSet = resultSet;
@@ -132,5 +137,11 @@ public class customerController {
         }catch (java.io.IOException exception){
             System.out.println("Couldn't launch manager Screen");
         }
+    }
+
+    public void CheckOut(final ActionEvent actionEvent) {
+        CheckOutController checkOutController = new CheckOutController(CardController.bookQuantityHashMap, CreditNumberField.getText(), CVVField.getText(), ExpireDateField.getText());
+        checkOutController.checkOut();
+        testLabel.setText("Purchase Done");
     }
 }

@@ -7,6 +7,7 @@ import contracts.SqlCommands;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class DataManager {
     private Connection connect = null;
@@ -20,32 +21,33 @@ public class DataManager {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Setup the connection with the DB
             connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/" + DBContract.DB_NAME, DBContract.DB_USERNAME,DBContract.DB_PASSWORD);
+                    .getConnection("jdbc:mysql://localhost/" + DBContract.DB_NAME, DBContract.DB_USERNAME, DBContract.DB_PASSWORD);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             System.out.println(e.getException().getMessage());
         }
     }
 
-    public static DataManager getInstance(){
-        if(uniqueInstance == null){
+    public static DataManager getInstance() {
+        if (uniqueInstance == null) {
             return uniqueInstance = new DataManager();
         }
         return uniqueInstance;
     }
 
-    public void deleteInstance(){
+    public void deleteInstance() {
         uniqueInstance = null;
         close();
     }
+
     private void close() {
         try {
             if (resultSet != null) {
                 resultSet.close();
             }
 
-            if (preparedStatement != null){
+            if (preparedStatement != null) {
                 preparedStatement.close();
             }
 
@@ -67,10 +69,10 @@ public class DataManager {
             preparedStatement.setString(1, userName);
             resultSet = preparedStatement.executeQuery();
             ArrayList<String> users = new ArrayList<>();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 users.add(resultSet.getString(DBContract.User.USER_NAME_COLUMN));
             }
-            if(users.size() == 0){
+            if (users.size() == 0) {
                 return false;
             }
             return true;
@@ -91,8 +93,8 @@ public class DataManager {
             preparedStatement.setString(6, customer.getAddress());
             preparedStatement.setString(7, customer.getCredential());
             preparedStatement.setString(8, customer.getEmail());
-            int cnt  = preparedStatement.executeUpdate();
-            if(cnt == 1){
+            int cnt = preparedStatement.executeUpdate();
+            if (cnt == 1) {
                 return true;
             }
             return false;
@@ -102,13 +104,13 @@ public class DataManager {
         }
     }
 
-    public String getUserHashedPassword(String userName){
+    public String getUserHashedPassword(String userName) {
         try {
             preparedStatement = connect.prepareStatement(SqlCommands.GET_PASSWORD);
             preparedStatement.setString(1, userName);
             resultSet = preparedStatement.executeQuery();
             String password = "";
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 password = resultSet.getString(DBContract.User.PASSWORD_COLUMN);
             }
             return password;
@@ -123,8 +125,8 @@ public class DataManager {
             preparedStatement = connect.prepareStatement(SqlCommands.GET_USER);
             preparedStatement.setString(1, userName);
             resultSet = preparedStatement.executeQuery();
-            HashMap <String, String> userData = new HashMap<>();
-            while(resultSet.next()){
+            HashMap<String, String> userData = new HashMap<>();
+            while (resultSet.next()) {
                 userData.put(DBContract.User.USER_NAME_COLUMN, resultSet.getString(DBContract.User.USER_NAME_COLUMN));
                 userData.put(DBContract.User.PASSWORD_COLUMN, resultSet.getString(DBContract.User.PASSWORD_COLUMN));
                 userData.put(DBContract.User.FIRST_NAME_COLUMN, resultSet.getString(DBContract.User.FIRST_NAME_COLUMN));
@@ -140,7 +142,8 @@ public class DataManager {
             return new HashMap<>();
         }
     }
-    public ResultSet getAllBook(){
+
+    public ResultSet getAllBook() {
         try {
             preparedStatement = connect.prepareStatement("select * from book");
             resultSet = preparedStatement.executeQuery();
@@ -150,11 +153,12 @@ public class DataManager {
             return null;
         }
     }
+
     public ResultSet searchForBook(ArrayList<String> searchParameters) {
         try {
             preparedStatement = connect.prepareStatement(SqlCommands.Search_For_Book);
             int index = 1;
-            for(int i = 0; i < searchParameters.size(); i++){
+            for (int i = 0; i < searchParameters.size(); i++) {
                 preparedStatement.setString(index++, searchParameters.get(i));
                 preparedStatement.setString(index++, searchParameters.get(i));
             }
@@ -177,7 +181,7 @@ public class DataManager {
             preparedStatement.setString(5, book.getSellingPrice());
             preparedStatement.setString(6, book.getAvailQuantity());
             preparedStatement.setString(7, book.getThreshold());
-            preparedStatement.setString(8, book.getDefaultOrder());
+            preparedStatement.setString(8, book.getPublisherName());
             int cnt  = preparedStatement.executeUpdate();
             if(cnt == 1){
                 return true;
@@ -189,11 +193,28 @@ public class DataManager {
         }
     }
 
-    public boolean insertAuthor(Author author, String isbn){
-        try{
+    public boolean insertAuthor(Author author, String isbn) {
+        try {
             preparedStatement = connect.prepareStatement(SqlCommands.INSERT_AUTHOR);
             preparedStatement.setString(1, isbn);
             preparedStatement.setString(2, author.getName());
+            int cnt = preparedStatement.executeUpdate();
+            if (cnt == 1) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean insertPublisher(Publisher publisher){
+        try{
+            preparedStatement = connect.prepareStatement(SqlCommands.INSERT_PUBLISHER);
+            preparedStatement.setString(1, publisher.getName());
+            preparedStatement.setString(2, publisher.getAddress());
+            preparedStatement.setString(3, publisher.getPhone());
             int cnt  = preparedStatement.executeUpdate();
             if(cnt == 1){
                 return true;
@@ -205,23 +226,46 @@ public class DataManager {
         }
     }
 
-    public boolean insertPublisher(Publisher publisher, String isbn){
-        try{
-            preparedStatement = connect.prepareStatement(SqlCommands.INSERT_PUBLISHER);
-            preparedStatement.setString(1, isbn);
-            preparedStatement.setString(2, publisher.getName());
-            preparedStatement.setString(3, publisher.getAddress());
-            preparedStatement.setString(4, publisher.getPhone());
-            int cnt  = preparedStatement.executeUpdate();
-            if(cnt == 1){
-                return true;
+
+    public void insertPurchase(ArrayList<String> parameters, HashMap<Book, Integer> orders) {
+        try {
+
+            connect.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            connect.setAutoCommit(false);
+            PreparedStatement purchaseStatment = connect.prepareStatement(SqlCommands.INSERT_PURCHASE);
+            PreparedStatement purchaseDetailsStatement = connect.prepareStatement(SqlCommands.INSERT_PURCHASE_DETAILS);
+            for (int i = 0; i < parameters.size(); i++) {
+                purchaseStatment.setString(i + 1, parameters.get(i));
             }
-            return false;
+            purchaseStatment.executeUpdate();
+            PreparedStatement lastId = connect.prepareStatement(SqlCommands.LAST_ID);
+            ResultSet resultSet = lastId.executeQuery();
+            resultSet.next();
+            String id = resultSet.getString(1);
+
+            for (Map.Entry<Book, Integer> e : orders.entrySet()) {
+                purchaseDetailsStatement.setString(1, id);
+                purchaseDetailsStatement.setString(2, e.getKey().getIsbn());
+                purchaseDetailsStatement.setString(3, String.valueOf(e.getValue()));
+                purchaseDetailsStatement.executeUpdate();
+            }
+            connect.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            try {
+                System.err.print("Transaction is being rolled back");
+                connect.rollback();
+            } catch (SQLException excep) {
+            }
+
+        } finally {
+            try {
+                connect.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
+
 
     public ResultSet getBook(String isbn){
         try {
@@ -233,4 +277,178 @@ public class DataManager {
             return null;
         }
     }
+
+    public ResultSet getAuthors(String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_AUTHORS);
+            preparedStatement.setString(1, isbn);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet getPublisher(String name){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_PUBLISHER);
+            preparedStatement.setString(1, name);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean deleteAuthors(String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.DELETE_AUTHORS);
+            preparedStatement.setString(1, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteBook(String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.DELETE_BOOK);
+            preparedStatement.setString(1, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookISBN(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_ISBN);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookTitle(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_TITLE);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookYear(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_YEAR);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookCategory(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_CATEGORY);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookPrice(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_PRICE);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookAvail(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_AVAILABLE);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookThreshold(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_THRESHOLD);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookPublisherName(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_PUBLISHER);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean promoteUser(String username){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.PROMOTE_USER);
+            preparedStatement.setString(1, username);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
+

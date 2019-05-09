@@ -19,7 +19,34 @@ public class SqlCommands {
             " and ( ? = '' OR a.author = ? );";
     public static final String INSERT_BOOK = "INSERT INTO " + DBContract.BOOK_TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
     public static final String INSERT_AUTHOR = "INSERT INTO " + DBContract.AUTHOR_TABLE + " VALUES(?, ?);";
-    public static final String INSERT_PUBLISHER = "INSERT INTO " + DBContract.PUBLISHER_TABLE + " VALUES(?, ?, ?, ?);";
-    public static final String GET_BOOK = "SELECT * FROM " + DBContract.BOOK_TABLE + " WHERE ISBN = ?;";
+    public static final String INSERT_PUBLISHER = "INSERT INTO " + DBContract.PUBLISHER_TABLE + " VALUES(?, ?, ?);";
+    public static final String GET_BOOK = "SELECT * FROM " + DBContract.BOOK_TABLE + " WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String GET_AUTHORS = "SELECT * FROM " + DBContract.AUTHOR_TABLE + " WHERE " + DBContract.Author.ISBN_COLUMN + " = ?;";
+    public static final String GET_PUBLISHER = "SELECT * FROM " + DBContract.PUBLISHER_TABLE + " WHERE " + DBContract.Publisher.NAME_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            " ? = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String DELETE_AUTHORS = "DELETE FROM " + DBContract.AUTHOR_TABLE + " WHERE " + DBContract.Author.ISBN_COLUMN + " = ?;";
+    public static final String DELETE_BOOK = "DELETE FROM " + DBContract.BOOK_TABLE + " WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_ISBN = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.ISBN_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_TITLE = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.TITLE_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_CATEGORY = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.CATEGORY_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_YEAR = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.PUBLICATION_YEAR_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_PRICE = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.SELLING_PRICE_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_AVAILABLE = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.AVAILABLE_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_THRESHOLD = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.THRESHOLD_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK_PUBLISHER = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.PUBLISHER_NAME_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String INSERT_PURCHASE = "INSERT INTO " + DBContract.PURCHASE_TABLE +" (user_name, purchase_time, credit_card, credit_card_cvv, credit_card_expiration) VALUES(?, ?, ?, ?, ?);";
+    public static final String INSERT_PURCHASE_DETAILS = "INSERT INTO purchase_detail VALUES (?, ?, ?);";
+    public static final String LAST_ID = "SELECT LAST_INSERT_ID() from " + DBContract.PURCHASE_TABLE + " ;";
+    public static final String PROMOTE_USER = "UPDATE " + DBContract.USER_TABLE + " SET " +
+            DBContract.User.CREDENTIAL_COLUMN + " = 'manager' WHERE " + DBContract.User.USER_NAME_COLUMN + " = ?;";
 }
 
