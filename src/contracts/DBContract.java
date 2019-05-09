@@ -37,6 +37,7 @@ public class DBContract {
         public static final String AVAILABLE_COLUMN = "available_quantity";
         public static final String THRESHOLD_COLUMN = "threshold";
         public static final String DEFAULT_ORDER_QUANTITY = "default_order";
+        public static final String PUBLISHER_NAME_COLUMN = "publisher_name";
     }
     public static class Order{
         public static final String ORDER_ID_COLUMN = "order_id";

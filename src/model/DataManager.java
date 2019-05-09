@@ -177,7 +177,7 @@ public class DataManager {
             preparedStatement.setString(5, book.getSellingPrice());
             preparedStatement.setString(6, book.getAvailQuantity());
             preparedStatement.setString(7, book.getThreshold());
-            preparedStatement.setString(8, book.getDefaultOrder());
+            preparedStatement.setString(8, book.getPublisherName());
             int cnt  = preparedStatement.executeUpdate();
             if(cnt == 1){
                 return true;
@@ -205,13 +205,12 @@ public class DataManager {
         }
     }
 
-    public boolean insertPublisher(Publisher publisher, String isbn){
+    public boolean insertPublisher(Publisher publisher){
         try{
             preparedStatement = connect.prepareStatement(SqlCommands.INSERT_PUBLISHER);
-            preparedStatement.setString(1, isbn);
-            preparedStatement.setString(2, publisher.getName());
-            preparedStatement.setString(3, publisher.getAddress());
-            preparedStatement.setString(4, publisher.getPhone());
+            preparedStatement.setString(1, publisher.getName());
+            preparedStatement.setString(2, publisher.getAddress());
+            preparedStatement.setString(3, publisher.getPhone());
             int cnt  = preparedStatement.executeUpdate();
             if(cnt == 1){
                 return true;
@@ -231,6 +230,152 @@ public class DataManager {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public ResultSet getAuthors(String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_AUTHORS);
+            preparedStatement.setString(1, isbn);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet getPublisher(String name){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_PUBLISHER);
+            preparedStatement.setString(1, name);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean deleteAuthors(String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.DELETE_AUTHORS);
+            preparedStatement.setString(1, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteBook(String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.DELETE_BOOK);
+            preparedStatement.setString(1, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookTitle(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_TITLE);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookYear(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_YEAR);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookCategory(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_CATEGORY);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookPrice(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_PRICE);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookAvail(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_AVAILABLE);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookThreshold(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_THRESHOLD);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateBookPublisherName(String text, String isbn) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_PUBLISHER);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

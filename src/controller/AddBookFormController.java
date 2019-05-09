@@ -18,7 +18,6 @@ public class AddBookFormController {
     public TextField priceTextField;
     public TextField availQtyTextField;
     public TextField thresholdTextField;
-    public TextField defaultOrderTextField;
     public Label addErrorLabel;
     public TextField authorsTextField;
     public TextField publisherNameTextField;
@@ -29,7 +28,13 @@ public class AddBookFormController {
         System.out.println("Category: " + categoryChoice.getValue().toString());
         Book book = new Book(isbnTextField.getText(), titleTextField.getText(), categoryChoice.getValue().toString()
         , yearTextField.getText(), priceTextField.getText(), availQtyTextField.getText()
-        , thresholdTextField.getText(), defaultOrderTextField.getText());
+        , thresholdTextField.getText(), publisherNameTextField.getText());
+
+        Publisher publisher = new Publisher(publisherNameTextField.getText(),
+                publisherAddressTextField.getText(), publisherPhoneTextField.getText());
+
+        if(DataManager.getInstance().insertPublisher(publisher))
+            System.out.println("Publisher inserted!");
 
         if(DataManager.getInstance().insertBook(book))
             System.out.println("Book Inserted!");
@@ -41,11 +46,5 @@ public class AddBookFormController {
             if(DataManager.getInstance().insertAuthor(author, book.getIsbn()))
                 System.out.println("Author Inserted! " + authorName);
         }
-
-        Publisher publisher = new Publisher(publisherNameTextField.getText(),
-                publisherAddressTextField.getText(), publisherPhoneTextField.getText());
-
-        if(DataManager.getInstance().insertPublisher(publisher, book.getIsbn()))
-            System.out.println("Publisher inserted!");
     }
 }
