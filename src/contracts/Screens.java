@@ -6,4 +6,5 @@ public class Screens {
     public static final String LOGIN_SCREEN = "Login Screen";
     public static final String CUSTOMER_SCREEN = "Customer Screen";
     public static final String MANAGER_SCREEN = "Manager Screen";
+    public static final String USER_PROFILE_SETTINGS = "Profile Edit";
 }

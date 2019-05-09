@@ -36,12 +36,12 @@ public class DataManager {
         return uniqueInstance;
     }
 
-    public void deleteInstance() {
+    public boolean deleteInstance() {
         uniqueInstance = null;
-        close();
+        return close();
     }
 
-    private void close() {
+    private boolean close() {
         try {
             if (resultSet != null) {
                 resultSet.close();
@@ -58,8 +58,10 @@ public class DataManager {
             if (connect != null) {
                 connect.close();
             }
+            return true;
         } catch (Exception e) {
             System.out.println(e.getCause().getMessage());
+            return false;
         }
     }
 
@@ -445,6 +447,29 @@ public class DataManager {
             System.out.println(preparedStatement.toString());
             preparedStatement.executeUpdate();
             return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateCustomer(Customer customer) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_CUSTOMER);
+            preparedStatement.setString(1, customer.getUserName());
+            preparedStatement.setString(2, customer.getHashedPassword());
+            preparedStatement.setString(3, customer.getFirstName());
+            preparedStatement.setString(4, customer.getLastName());
+            preparedStatement.setString(5, customer.getPhoneNumber());
+            preparedStatement.setString(6, customer.getAddress());
+            preparedStatement.setString(7, customer.getCredential());
+            preparedStatement.setString(8, customer.getEmail());
+            preparedStatement.setString(9, customer.getUserName());
+            int cnt = preparedStatement.executeUpdate();
+            if (cnt == 1) {
+                return true;
+            }
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

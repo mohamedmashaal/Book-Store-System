@@ -125,28 +125,28 @@ public class registerFormController {
     }
 
     private boolean checkNonEmptyFields() {
-        if(userNameField.getText() == null || userNameField.getText() == ""){
+        if(userNameField.getText() == null || userNameField.getText().equals("")){
             return false;
         }
-        else if(passwordField.getText() == null || passwordField.getText() == ""){
+        else if(passwordField.getText() == null || passwordField.getText().equals("")){
             return false;
         }
-        else if(confirmPasswordField.getText() == null || confirmPasswordField.getText() == ""){
+        else if(confirmPasswordField.getText() == null || confirmPasswordField.getText().equals("")){
             return false;
         }
-        else if(firstNameField.getText() == null || firstNameField.getText() == ""){
+        else if(firstNameField.getText() == null || firstNameField.getText().equals("")){
             return false;
         }
-        else if(lastNameField.getText() == null || lastNameField.getText() == ""){
+        else if(lastNameField.getText() == null || lastNameField.getText().equals("")){
             return false;
         }
-        else if(emailField.getText() == null || emailField.getText() == ""){
+        else if(emailField.getText() == null || emailField.getText().equals("")){
             return false;
         }
-        else if(phoneField.getText() == null || phoneField.getText() == ""){
+        else if(phoneField.getText() == null || phoneField.getText().equals("")){
             return false;
         }
-        else if(addressField.getText() == null || addressField.getText() == ""){
+        else if(addressField.getText() == null || addressField.getText().equals("")){
             return false;
         }
         return true;

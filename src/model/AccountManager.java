@@ -38,11 +38,20 @@ public class AccountManager {
         return customer;
     }
 
-    public boolean logout(Customer customer){
-        return true;
+    public boolean logout(){
+        deleteInstance();
+        return DataManager.getInstance().deleteInstance();
     }
 
     public Customer getCurrentUser(){
         return currentUser;
+    }
+
+    public void setCurrentUser(Customer customer){
+        this.currentUser = customer;
+    }
+
+    private void deleteInstance(){
+        uniqueInstance = null;
     }
 }

@@ -48,5 +48,9 @@ public class SqlCommands {
     public static final String LAST_ID = "SELECT LAST_INSERT_ID() from " + DBContract.PURCHASE_TABLE + " ;";
     public static final String PROMOTE_USER = "UPDATE " + DBContract.USER_TABLE + " SET " +
             DBContract.User.CREDENTIAL_COLUMN + " = 'manager' WHERE " + DBContract.User.USER_NAME_COLUMN + " = ?;";
+    public static final String UPDATE_CUSTOMER = "UPDATE " + DBContract.USER_TABLE + " SET " + DBContract.User.USER_NAME_COLUMN + "=?," +
+        DBContract.User.PASSWORD_COLUMN + "=?," +  DBContract.User.FIRST_NAME_COLUMN + "=?," + DBContract.User.LAST_NAME_COLUMN + "=?," +
+            DBContract.User.PHONE_COLUMN + "=?," + DBContract.User.ADDRESS_COLUMN + "=?," + DBContract.User.CREDENTIAL_COLUMN + "=?," +
+            DBContract.User.EMAIL_COLUMN + "=?" + " WHERE " + DBContract.User.USER_NAME_COLUMN + " = ?;";
 }
 
