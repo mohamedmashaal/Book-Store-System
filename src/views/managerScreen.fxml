@@ -9,7 +9,7 @@
       <Label fx:id="welcomeLabel" layoutX="73.0" layoutY="185.0" />
       <Button fx:id="addBookBtn" onAction="#addBookClicked" layoutX="73.0" layoutY="37.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Add Book" />
       <Button fx:id="editBookBtn" onAction="#editBookClicked" layoutX="269.0" layoutY="37.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Edit Book" />
-      <Button fx:id="placeOrderBtn" layoutX="73.0" layoutY="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Place Order" />
+      <Button fx:id="placeOrderBtn" onAction="#placeOrderBtnClikced" layoutX="73.0" layoutY="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Place Order" />
       <Button fx:id="confirmOrderBtn" layoutX="269.0" layoutY="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Confirm Order" />
       <Button fx:id="promoteUserBtn" onAction="#promoteUserClicked" layoutX="73.0" layoutY="143.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Promote User" />
       <Button fx:id="viewReportsBtn" layoutX="269.0" layoutY="143.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="View Reports" />

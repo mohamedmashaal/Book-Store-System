@@ -328,6 +328,27 @@ public class DataManager {
         }
     }
 
+    public boolean updateBook(Book book, String oldIsbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK);
+            preparedStatement.setString(1, book.getIsbn());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(3, book.getCategory());
+            preparedStatement.setString(4, book.getYear());
+            preparedStatement.setString(5, book.getSellingPrice());
+            preparedStatement.setString(6, book.getAvailQuantity());
+            preparedStatement.setString(7, book.getThreshold());
+            preparedStatement.setString(8, book.getPublisherName());
+            preparedStatement.setString(9, oldIsbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean updateBookISBN(String text, String isbn) {
         try {
             preparedStatement = connect.prepareStatement(SqlCommands.UPDATE_BOOK_ISBN);
@@ -444,6 +465,42 @@ public class DataManager {
         try {
             preparedStatement = connect.prepareStatement(SqlCommands.PROMOTE_USER);
             preparedStatement.setString(1, username);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String insertOrder(String username, String orderTime){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.INSERT_ORDER, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, orderTime);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            String orderId = "";
+            if(resultSet.next()){
+                System.out.println(resultSet.getString(1));
+                orderId = resultSet.getString(1);
+
+            }
+            return orderId;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean insertOrderDetail(String orderID, String bookIsbn, String quantity){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.INSERT_ORDER_DETAIL);
+            preparedStatement.setString(1, orderID);
+            preparedStatement.setString(2, bookIsbn);
+            preparedStatement.setString(3, quantity);
             System.out.println(preparedStatement.toString());
             preparedStatement.executeUpdate();
             return true;
