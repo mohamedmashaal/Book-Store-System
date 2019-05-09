@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController">
    <children>
-      <Label fx:id="testLabel" layoutX="14.0" layoutY="561.0" prefHeight="25.0" prefWidth="102.0">
+      <Label fx:id="testLabel" layoutX="14.0" layoutY="561.0" prefHeight="27.0" prefWidth="251.0">
          <font>
             <Font size="18.0" />
          </font></Label>
@@ -27,8 +27,12 @@
       <TextField fx:id="ThresholdField" layoutX="348.0" layoutY="256.0" promptText="Threshold" />
       <VBox fx:id="Card" layoutX="580.0" layoutY="26.0" prefHeight="355.0" prefWidth="411.0" stylesheets="@HBox.css" />
       <TextField fx:id="QuantityField" layoutX="315.0" layoutY="443.0" promptText="Quantity" />
-      <Button fx:id="CheckOutButton" layoutX="216.0" layoutY="443.0" mnemonicParsing="false" onAction="#addToCart" text="Add To Cart" />
+      <Button layoutX="216.0" layoutY="443.0" mnemonicParsing="false" onAction="#addToCart" text="Add To Cart" />
       <Button fx:id="controlPanelButton" layoutX="855.0" layoutY="546.0" mnemonicParsing="false" onAction="#openControlPanel" text="Control Panel" />
       <Label fx:id="controlPanelErrorLabel" layoutX="609.0" layoutY="551.0" prefHeight="21.0" prefWidth="236.0" />
+      <Button fx:id="CheckOutButton" layoutX="609.0" layoutY="393.0" mnemonicParsing="false" onAction="#CheckOut" prefHeight="25.0" prefWidth="102.0" text="Check Out" />
+      <TextField fx:id="CreditNumberField" layoutX="750.0" layoutY="393.0" prefHeight="25.0" prefWidth="222.0" promptText="Credit Card Number" />
+      <TextField fx:id="CVVField" layoutX="750.0" layoutY="431.0" prefHeight="25.0" prefWidth="222.0" promptText="CVV" />
+      <TextField fx:id="ExpireDateField" layoutX="750.0" layoutY="468.0" prefHeight="25.0" prefWidth="222.0" promptText="Expire Date" />
    </children>
 </AnchorPane>

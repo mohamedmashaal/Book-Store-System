@@ -41,6 +41,8 @@ public class SqlCommands {
             DBContract.Book.THRESHOLD_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String UPDATE_BOOK_PUBLISHER = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
             DBContract.Book.PUBLISHER_NAME_COLUMN + " = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
-
+    public static final String INSERT_PURCHASE = "INSERT INTO " + DBContract.PURCHASE_TABLE +" (user_name, purchase_time, credit_card, credit_card_cvv, credit_card_expiration) VALUES(?, ?, ?, ?, ?);";
+    public static final String INSERT_PURCHASE_DETAILS = "INSERT INTO purchase_detail VALUES (?, ?, ?);";
+    public static final String LAST_ID = "SELECT LAST_INSERT_ID() from " + DBContract.PURCHASE_TABLE + " ;";
 }
 
