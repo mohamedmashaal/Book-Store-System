@@ -60,4 +60,19 @@ public class ManagerController {
             System.out.println("Couldn't launch promote user form Screen");
         }
     }
+
+    public void placeOrderBtnClikced() {
+        Parent root;
+
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/orderPlaceForm.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Place Order Form");
+            stage.setScene(new Scene(root));
+            stage.show();
+            //controlPanelButton.getScene().getWindow().hide();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch place order form Screen");
+        }
+    }
 }
