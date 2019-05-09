@@ -49,6 +49,7 @@ public class EditBookFormController {
             System.out.println("Publisher inserted!");
 
         //update book
+        /*
         DataManager.getInstance().updateBookISBN(isbnTextField.getText(), searchTextField.getText());
         DataManager.getInstance().updateBookTitle(titleTextField.getText(), isbn);
         DataManager.getInstance().updateBookYear(yearTextField.getText(), isbn);
@@ -57,6 +58,11 @@ public class EditBookFormController {
         DataManager.getInstance().updateBookAvail(availQtyTextField.getText(), isbn);
         DataManager.getInstance().updateBookThreshold(thresholdTextField.getText(), isbn);
         DataManager.getInstance().updateBookPublisherName(publisherNameTextField.getText(), isbn);
+        */
+        Book book = new Book(isbnTextField.getText(), titleTextField.getText(), categoryChoice.getValue().toString(),
+                yearTextField.getText(), priceTextField.getText(), availQtyTextField.getText(),
+                thresholdTextField.getText(), publisherNameTextField.getText());
+        DataManager.getInstance().updateBook(book, searchTextField.getText());
 
         //update authors
         String[] authorNames = authorsTextField.getText().split(",");
@@ -95,7 +101,7 @@ public class EditBookFormController {
 
             isbnTextField.setText(book.getIsbn());
             titleTextField.setText(book.getTitle());
-            yearTextField.setText(book.getYear());
+            yearTextField.setText(book.getYear().split("-")[0]);
             categoryChoice.setValue(book.getCategory());
             priceTextField.setText(book.getSellingPrice());
             availQtyTextField.setText(book.getAvailQuantity());

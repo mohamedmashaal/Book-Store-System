@@ -23,8 +23,6 @@ public class SqlCommands {
     public static final String GET_BOOK = "SELECT * FROM " + DBContract.BOOK_TABLE + " WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String GET_AUTHORS = "SELECT * FROM " + DBContract.AUTHOR_TABLE + " WHERE " + DBContract.Author.ISBN_COLUMN + " = ?;";
     public static final String GET_PUBLISHER = "SELECT * FROM " + DBContract.PUBLISHER_TABLE + " WHERE " + DBContract.Publisher.NAME_COLUMN + " = ?;";
-    public static final String UPDATE_BOOK = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
-            " ? = ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String DELETE_AUTHORS = "DELETE FROM " + DBContract.AUTHOR_TABLE + " WHERE " + DBContract.Author.ISBN_COLUMN + " = ?;";
     public static final String DELETE_BOOK = "DELETE FROM " + DBContract.BOOK_TABLE + " WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String UPDATE_BOOK_ISBN = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
@@ -52,5 +50,17 @@ public class SqlCommands {
 
     public static final String PROMOTE_USER = "UPDATE " + DBContract.USER_TABLE + " SET " +
             DBContract.User.CREDENTIAL_COLUMN + " = 'manager' WHERE " + DBContract.User.USER_NAME_COLUMN + " = ?;";
+    public static final String UPDATE_BOOK = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.ISBN_COLUMN + " = ?, " +
+            DBContract.Book.TITLE_COLUMN + " = ?, " +
+            DBContract.Book.CATEGORY_COLUMN + " = ?, " +
+            DBContract.Book.PUBLICATION_YEAR_COLUMN + " = ?, " +
+            DBContract.Book.SELLING_PRICE_COLUMN + " = ?, " +
+            DBContract.Book.AVAILABLE_COLUMN + " = ?, " +
+            DBContract.Book.THRESHOLD_COLUMN + " = ?, " +
+            DBContract.Book.PUBLISHER_NAME_COLUMN + " = ?" +
+            " WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
+    public static final String INSERT_ORDER = "INSERT INTO " + DBContract.ORDER_TABLE + "(" + DBContract.Order.USER_NAME_COLUMN + "," + DBContract.Order.ORDER_TIME_COLUMN + ")" + " VALUES(?, ?);";
+    public static final String INSERT_ORDER_DETAIL = "INSERT INTO " + DBContract.ORDER_DETAIL_TABLE + " VALUES(?, ?, ?);";;
 }
 
