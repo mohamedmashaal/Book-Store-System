@@ -1,5 +1,6 @@
 package controller;
 
+import contracts.Colors;
 import contracts.Screens;
 import contracts.Users;
 import javafx.application.Platform;
@@ -12,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.AccountManager;
 import model.Customer;
@@ -43,6 +45,10 @@ public class customerController {
     public TextField ExpireDateField;
     @FXML
     private Label testLabel;
+    @FXML
+    private Label errorLabelVisa;
+    @FXML
+    private Label errorLabelQuantity;
 
     ResultSet lastResultSet;
 
@@ -122,11 +128,25 @@ public class customerController {
     }
 
     public void addToCart(final ActionEvent actionEvent) throws SQLException {
-        int index = 0;
-        ResultSet temp = lastResultSet;
-        ArrayList<String> selectedRow = (ArrayList<String>) DataTable.getSelectionModel().getSelectedItem();
-        CardController card = new CardController(this.Card, QuantityField.getText(), selectedRow);
-        card.addToCard();
+        resetErrorLabel(errorLabelQuantity);
+        if(checkQuantity()) {
+            int index = 0;
+            ResultSet temp = lastResultSet;
+            ArrayList<String> selectedRow = (ArrayList<String>) DataTable.getSelectionModel().getSelectedItem();
+            CardController card = new CardController(this.Card, QuantityField.getText(), selectedRow);
+            card.addToCard();
+        }
+        else{
+            setErrorLabel("Check Quantity", errorLabelQuantity);
+        }
+    }
+
+    private boolean checkQuantity(){
+        if(QuantityField.getText() == null || QuantityField.getText().equals(""))
+            return false;
+        if(!QuantityField.getText().matches("[0-9]+"))
+            return false;
+        return true;
     }
 
     public void openControlPanel(){
@@ -156,9 +176,61 @@ public class customerController {
     }
 
     public void CheckOut(final ActionEvent actionEvent) {
-        CheckOutController checkOutController = new CheckOutController(CardController.bookQuantityHashMap, CreditNumberField.getText(), CVVField.getText(), ExpireDateField.getText());
-        checkOutController.checkOut();
-        testLabel.setText("Purchase Done");
+        resetErrorLabel(errorLabelVisa);
+        if(nonEmpty() && followPattern()){
+            CheckOutController checkOutController = new CheckOutController(CardController.bookQuantityHashMap, CreditNumberField.getText(), CVVField.getText(), getDate(ExpireDateField.getText()));
+            checkOutController.checkOut();
+            testLabel.setText("Purchase Done");
+        }
+        else{
+            setErrorLabel("Check Credit Card Info", errorLabelVisa);
+        }
+    }
+
+    private String getDate(String expiration){
+        String date = new String("20XX-XX-00");
+        for(int i = 0 ; i <expiration.length() ; i++){
+            date = date.replaceFirst("X", Character.toString(expiration.charAt(i)));
+        }
+        return date;
+    }
+
+    private boolean nonEmpty() {
+        if(CreditNumberField.getText() == null || CreditNumberField.getText().equals("")){
+            return false;
+        }
+        else if(CVVField.getText() == null || CVVField.getText().equals("")){
+            return false;
+        }
+        else if(ExpireDateField.getText() == null || ExpireDateField.getText().equals("")){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean followPattern() {
+        if(nonEmpty()){
+            if(haveAnythingButNumbers()) {
+                if (CreditNumberField.getText().length() != 16)
+                    return false;
+                if (CVVField.getText().length() != 3 && CVVField.getText().length() != 4)
+                    return false;
+                if(ExpireDateField.getText().length() != 4)
+                    return false;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean haveAnythingButNumbers() {
+        if(!CreditNumberField.getText().matches("[0-9]+"))
+            return false;
+        if(!CVVField.getText().matches("[0-9]+"))
+            return false;
+        if(!ExpireDateField.getText().matches("[0-9]+"))
+            return false;
+        return true;
     }
 
     public void logOut(ActionEvent actionEvent){
@@ -179,5 +251,14 @@ public class customerController {
         }catch (java.io.IOException exception){
             System.out.println("Couldn't launch Start Screen");
         }
+    }
+
+    private void resetErrorLabel(Label label){
+        label.setText("");
+    }
+
+    private void setErrorLabel(String error,Label label){
+        label.setText(error);
+        label.setTextFill(Color.web(Colors.ERROR_RED));
     }
 }

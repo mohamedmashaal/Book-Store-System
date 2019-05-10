@@ -1,6 +1,5 @@
 package model;
 
-import com.mysql.cj.xdevapi.SqlStatement;
 import contracts.DBContract;
 import contracts.SqlCommands;
 import javafx.util.Pair;

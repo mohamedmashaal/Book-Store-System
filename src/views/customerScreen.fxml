@@ -33,8 +33,10 @@
       <Button fx:id="CheckOutButton" layoutX="609.0" layoutY="393.0" mnemonicParsing="false" onAction="#CheckOut" prefHeight="25.0" prefWidth="102.0" text="Check Out" />
       <TextField fx:id="CreditNumberField" layoutX="750.0" layoutY="393.0" prefHeight="25.0" prefWidth="222.0" promptText="Credit Card Number" />
       <TextField fx:id="CVVField" layoutX="750.0" layoutY="431.0" prefHeight="25.0" prefWidth="222.0" promptText="CVV" />
-      <TextField fx:id="ExpireDateField" layoutX="750.0" layoutY="468.0" prefHeight="25.0" prefWidth="222.0" promptText="Expire Date" />
+      <TextField fx:id="ExpireDateField" layoutX="750.0" layoutY="468.0" prefHeight="25.0" prefWidth="222.0" promptText="Expire Date MMYY" />
       <Button fx:id="settingsButton" layoutX="770.0" layoutY="546.0" mnemonicParsing="false" onAction="#editSettings" text="Settings" />
       <Button fx:id="logOutButton" layoutX="687.0" layoutY="546.0" mnemonicParsing="false" onAction="#logOut" text="Log out" />
+      <Label fx:id="errorLabelVisa" layoutX="753.0" layoutY="507.0" />
+      <Label fx:id="errorLabelQuantity" layoutX="316.0" layoutY="489.0" />
    </children>
 </AnchorPane>
