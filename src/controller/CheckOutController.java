@@ -21,7 +21,7 @@ public class CheckOutController {
         this.crediCardNumber = crediCardNumber;
         this.cvv = cvv;
         this.expireDate = expireDate;
-        done = done;
+        this.done = done;
     }
     public void checkOut(){
         ArrayList<String> parametes = new ArrayList<String>();

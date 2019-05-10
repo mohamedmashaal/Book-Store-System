@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController">
    <children>
-      <Label fx:id="testLabel" layoutX="14.0" layoutY="561.0" prefHeight="27.0" prefWidth="251.0">
+      <Label fx:id="testLabel" layoutX="14.0" layoutY="561.0" prefHeight="27.0" prefWidth="614.0">
          <font>
             <Font size="18.0" />
          </font></Label>
