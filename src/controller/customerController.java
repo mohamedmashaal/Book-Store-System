@@ -43,6 +43,7 @@ public class customerController {
     public TextField CreditNumberField;
     public TextField CVVField;
     public TextField ExpireDateField;
+    public Label TotalPriceField;
     @FXML
     private Label testLabel;
     @FXML
@@ -133,7 +134,7 @@ public class customerController {
             int index = 0;
             ResultSet temp = lastResultSet;
             ArrayList<String> selectedRow = (ArrayList<String>) DataTable.getSelectionModel().getSelectedItem();
-            CardController card = new CardController(this.Card, QuantityField.getText(), selectedRow);
+            CardController card = new CardController(this.Card, QuantityField.getText(), selectedRow, TotalPriceField);
             card.addToCard();
         }
         else{
