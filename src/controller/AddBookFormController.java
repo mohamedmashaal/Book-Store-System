@@ -36,15 +36,17 @@ public class AddBookFormController {
         if(DataManager.getInstance().insertPublisher(publisher))
             System.out.println("Publisher inserted!");
 
-        if(DataManager.getInstance().insertBook(book))
+        if(DataManager.getInstance().insertBook(book)) {
             System.out.println("Book Inserted!");
-
-        String[] authorNames = authorsTextField.getText().split(",");
-        for(String authorName : authorNames){
-            System.out.println("Author: " + authorName);
-            Author author = new Author(authorName);
-            if(DataManager.getInstance().insertAuthor(author, book.getIsbn()))
-                System.out.println("Author Inserted! " + authorName);
+            String[] authorNames = authorsTextField.getText().split(",");
+            for(String authorName : authorNames){
+                System.out.println("Author: " + authorName);
+                Author author = new Author(authorName);
+                if(DataManager.getInstance().insertAuthor(author, book.getIsbn()))
+                    System.out.println("Author Inserted! " + authorName);
+            }
         }
+        else
+            addErrorLabel.setText("Book cannot be added!");
     }
 }

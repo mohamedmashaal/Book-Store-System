@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="334.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddBookFormController">
+<AnchorPane prefHeight="395.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddBookFormController">
     <Label layoutX="26.0" layoutY="35.0" text="ISBN" />
     <TextField fx:id="isbnTextField" layoutX="150.0" layoutY="30.0" prefHeight="31.0" prefWidth="187.0" />
     <Label layoutX="26.0" layoutY="75.0" text="Title" />
@@ -34,7 +34,6 @@
     <Label layoutX="26.0" layoutY="275.0" text="Threshold" />
     <TextField fx:id="thresholdTextField" layoutX="150.0" layoutY="270.0" prefHeight="31.0" prefWidth="187.0" />
     <Button layoutX="255.0" layoutY="346.0" mnemonicParsing="false" onAction="#addBtnClicked" prefHeight="31.0" prefWidth="282.0" text="Add" />
-    <Label fx:id="addErrorLabel" layoutX="133.0" layoutY="377.0" prefHeight="21.0" prefWidth="209.0" />
 
    <Label layoutX="361.0" layoutY="35.0" text="Authors (Comma Separated)" />
    <TextField fx:id="authorsTextField" layoutX="570.0" layoutY="30.0" prefHeight="31.0" prefWidth="187.0" />
@@ -44,4 +43,5 @@
    <TextField fx:id="publisherAddressTextField" layoutX="570.0" layoutY="110.0" prefHeight="31.0" prefWidth="187.0" />
    <Label layoutX="361.0" layoutY="155.0" text="Publisher Phnoe" />
    <TextField fx:id="publisherPhoneTextField" layoutX="570.0" layoutY="150.0" prefHeight="31.0" prefWidth="187.0" />
+   <Label fx:id="addErrorLabel" layoutX="23.0" layoutY="351.0" prefHeight="21.0" prefWidth="225.0" />
 </AnchorPane>

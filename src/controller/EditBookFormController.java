@@ -28,6 +28,7 @@ public class EditBookFormController {
     public TextField isbnTextField;
     public TextField titleTextField;
     public ChoiceBox categoryChoice;
+    public Label editErrorLabel;
 
     public void deleteBtnClicked() {
         String isbn = isbnTextField.getText();
@@ -62,14 +63,17 @@ public class EditBookFormController {
         Book book = new Book(isbnTextField.getText(), titleTextField.getText(), categoryChoice.getValue().toString(),
                 yearTextField.getText(), priceTextField.getText(), availQtyTextField.getText(),
                 thresholdTextField.getText(), publisherNameTextField.getText());
-        DataManager.getInstance().updateBook(book, searchTextField.getText());
-
-        //update authors
-        String[] authorNames = authorsTextField.getText().split(",");
-        for(String authorName : authorNames){
-            Author author = new Author(authorName);
-            if(DataManager.getInstance().insertAuthor(author, isbn))
-                System.out.println("Author Inserted! " + authorName);
+        if(DataManager.getInstance().updateBook(book, searchTextField.getText())){
+            //update authors
+            String[] authorNames = authorsTextField.getText().split(",");
+            for(String authorName : authorNames){
+                Author author = new Author(authorName);
+                if(DataManager.getInstance().insertAuthor(author, isbn))
+                    System.out.println("Author Inserted! " + authorName);
+            }
+        }
+        else{
+            editErrorLabel.setText("Book cannot be edited!");
         }
     }
 
