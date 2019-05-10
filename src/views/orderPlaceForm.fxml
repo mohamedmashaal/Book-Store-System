@@ -5,13 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="190.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderPlaceFormController">
+<AnchorPane prefHeight="210.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderPlaceFormController">
    <children>
-      <Button onAction="#orderBtnClicked" layoutX="74.0" layoutY="136.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="196.0" text="Order" />
+      <Button layoutX="74.0" layoutY="136.0" mnemonicParsing="false" onAction="#orderBtnClicked" prefHeight="31.0" prefWidth="196.0" text="Order" />
       <TextField fx:id="isbnTextField" layoutX="139.0" layoutY="36.0" />
       <Label layoutX="19.0" layoutY="41.0" prefHeight="21.0" prefWidth="104.0" text="ISBN" />
       <TextField fx:id="quantityTextField" layoutX="139.0" layoutY="77.0" />
       <Label layoutX="19.0" layoutY="82.0" prefHeight="21.0" prefWidth="104.0" text="Quantity" />
+      <Label fx:id="notifLabel" layoutX="139.0" layoutY="175.0" prefHeight="21.0" prefWidth="135.0" />
    </children>
 </AnchorPane>
