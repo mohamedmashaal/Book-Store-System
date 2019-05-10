@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.userSettingsFormController">
+   <children>
+      <Label text="First Name*" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" top="20.0" />
+         </VBox.margin></Label>
+      <TextField fx:id="firstNameField">
+         <VBox.margin>
+            <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+         </VBox.margin></TextField>
+      <Label text="Last Name*" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin></Label>
+      <TextField fx:id="lastNameField">
+         <VBox.margin>
+            <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+         </VBox.margin></TextField>
+      <Label text="Address*" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin></Label>
+      <TextField fx:id="addressField">
+         <VBox.margin>
+            <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+         </VBox.margin></TextField>
+      <Label text="Phone*" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin></Label>
+      <TextField fx:id="phoneField">
+         <VBox.margin>
+            <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+         </VBox.margin></TextField>
+      <Label text="Email*" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin></Label>
+      <TextField fx:id="emailField">
+         <VBox.margin>
+            <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+         </VBox.margin></TextField>
+      <Label text="Old Password*" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin></Label>
+      <PasswordField fx:id="oldPasswordField">
+         <VBox.margin>
+            <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+         </VBox.margin></PasswordField>
+      <Label text="New Password" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin></Label>
+      <PasswordField fx:id="newPasswordField">
+         <VBox.margin>
+            <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+         </VBox.margin></PasswordField>
+      <Label text="Confirm Password" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin></Label>
+      <PasswordField fx:id="confirmPasswordField">
+         <VBox.margin>
+            <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+         </VBox.margin></PasswordField>
+      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveDetails" text="Save">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin></Button>
+      <Label fx:id="errorLabel">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+</VBox>

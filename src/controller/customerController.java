@@ -1,11 +1,13 @@
 package controller;
 
+import contracts.Screens;
 import contracts.Users;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -54,6 +56,20 @@ public class customerController {
         ExpireDateField.setText("2006-05-03");
 
     }
+
+    public void editSettings(ActionEvent event){
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("views/userSettingsScreen.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle(Screens.USER_PROFILE_SETTINGS);
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch Profile edit window.");
+        }
+    }
+
     private void showDatainTableView(ResultSet resultSet) throws SQLException {
         lastResultSet = resultSet;
         DataTable.getItems().clear();
@@ -143,5 +159,25 @@ public class customerController {
         CheckOutController checkOutController = new CheckOutController(CardController.bookQuantityHashMap, CreditNumberField.getText(), CVVField.getText(), ExpireDateField.getText());
         checkOutController.checkOut();
         testLabel.setText("Purchase Done");
+    }
+
+    public void logOut(ActionEvent actionEvent){
+        AccountManager.getManager().logout();
+        startStartScreen(actionEvent);
+    }
+
+    private void startStartScreen(ActionEvent event) {
+        Parent root;
+
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("views/startScreen.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle(Screens.START_SCREEN);
+            stage.setScene(new Scene(root));
+            stage.show();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch Start Screen");
+        }
     }
 }

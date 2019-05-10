@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController">
    <children>
       <Label fx:id="testLabel" layoutX="14.0" layoutY="561.0" prefHeight="27.0" prefWidth="251.0">
          <font>
@@ -16,17 +16,17 @@
          </font></Label>
       <TableView fx:id="DataTable" prefHeight="225.0" prefWidth="567.0" />
       <Button fx:id="SearchButton" layoutX="216.0" layoutY="393.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="79.0" text="Search" />
-      <TextField fx:id="CategoryField" layoutX="14.0" layoutY="333.0" promptText="Category" />
-      <TextField fx:id="AvailableQuantityField" layoutX="181.0" layoutY="333.0" promptText="Publisher Name" />
-      <TextField fx:id="SellingPriceField" layoutX="181.0" layoutY="293.0" promptText="Selling Price" />
-      <TextField fx:id="PublicationYearField" layoutX="181.0" layoutY="256.0" promptText="Publication Year" />
-      <TextField fx:id="TitleField" layoutX="14.0" layoutY="293.0" promptText="Title" />
-      <TextField fx:id="ISBNField" layoutX="14.0" layoutY="256.0" promptText="ISBN" />
-      <TextField fx:id="AuthorNameField" layoutX="348.0" layoutY="333.0" promptText="Author Name" />
-      <TextField fx:id="PublisherName" layoutX="348.0" layoutY="293.0" promptText="Default Order" />
-      <TextField fx:id="ThresholdField" layoutX="348.0" layoutY="256.0" promptText="Threshold" />
+      <TextField fx:id="CategoryField" layoutX="14.0" layoutY="333.0" prefHeight="31.0" prefWidth="168.0" promptText="Category" />
+      <TextField fx:id="AvailableQuantityField" layoutX="181.0" layoutY="333.0" prefHeight="31.0" prefWidth="168.0" promptText="Publisher Name" />
+      <TextField fx:id="SellingPriceField" layoutX="181.0" layoutY="293.0" prefHeight="31.0" prefWidth="168.0" promptText="Selling Price" />
+      <TextField fx:id="PublicationYearField" layoutX="181.0" layoutY="256.0" prefHeight="31.0" prefWidth="168.0" promptText="Publication Year" />
+      <TextField fx:id="TitleField" layoutX="14.0" layoutY="293.0" prefHeight="31.0" prefWidth="168.0" promptText="Title" />
+      <TextField fx:id="ISBNField" layoutX="14.0" layoutY="256.0" prefHeight="31.0" prefWidth="168.0" promptText="ISBN" />
+      <TextField fx:id="AuthorNameField" layoutX="348.0" layoutY="333.0" prefHeight="31.0" prefWidth="168.0" promptText="Author Name" />
+      <TextField fx:id="PublisherName" layoutX="348.0" layoutY="293.0" prefHeight="31.0" prefWidth="168.0" promptText="Default Order" />
+      <TextField fx:id="ThresholdField" layoutX="348.0" layoutY="256.0" prefHeight="31.0" prefWidth="168.0" promptText="Threshold" />
       <VBox fx:id="Card" layoutX="580.0" layoutY="26.0" prefHeight="355.0" prefWidth="411.0" stylesheets="@HBox.css" />
-      <TextField fx:id="QuantityField" layoutX="315.0" layoutY="443.0" promptText="Quantity" />
+      <TextField fx:id="QuantityField" layoutX="315.0" layoutY="443.0" prefHeight="31.0" prefWidth="168.0" promptText="Quantity" />
       <Button layoutX="216.0" layoutY="443.0" mnemonicParsing="false" onAction="#addToCart" text="Add To Cart" />
       <Button fx:id="controlPanelButton" layoutX="855.0" layoutY="546.0" mnemonicParsing="false" onAction="#openControlPanel" text="Control Panel" />
       <Label fx:id="controlPanelErrorLabel" layoutX="609.0" layoutY="551.0" prefHeight="21.0" prefWidth="236.0" />
@@ -34,5 +34,7 @@
       <TextField fx:id="CreditNumberField" layoutX="750.0" layoutY="393.0" prefHeight="25.0" prefWidth="222.0" promptText="Credit Card Number" />
       <TextField fx:id="CVVField" layoutX="750.0" layoutY="431.0" prefHeight="25.0" prefWidth="222.0" promptText="CVV" />
       <TextField fx:id="ExpireDateField" layoutX="750.0" layoutY="468.0" prefHeight="25.0" prefWidth="222.0" promptText="Expire Date" />
+      <Button fx:id="settingsButton" layoutX="770.0" layoutY="546.0" mnemonicParsing="false" onAction="#editSettings" text="Settings" />
+      <Button fx:id="logOutButton" layoutX="687.0" layoutY="546.0" mnemonicParsing="false" onAction="#logOut" text="Log out" />
    </children>
 </AnchorPane>
