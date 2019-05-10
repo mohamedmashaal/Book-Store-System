@@ -25,7 +25,8 @@ public class AddBookFormController {
     public TextField publisherPhoneTextField;
 
     public void addBtnClicked(ActionEvent actionEvent) {
-        System.out.println("Category: " + categoryChoice.getValue().toString());
+        addErrorLabel.setText("");
+
         Book book = new Book(isbnTextField.getText(), titleTextField.getText(), categoryChoice.getValue().toString()
         , yearTextField.getText(), priceTextField.getText(), availQtyTextField.getText()
         , thresholdTextField.getText(), publisherNameTextField.getText());
@@ -45,6 +46,8 @@ public class AddBookFormController {
                 if(DataManager.getInstance().insertAuthor(author, book.getIsbn()))
                     System.out.println("Author Inserted! " + authorName);
             }
+
+            addErrorLabel.setText("Success!");
         }
         else
             addErrorLabel.setText("Book cannot be added!");

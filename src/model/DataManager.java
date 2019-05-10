@@ -603,6 +603,18 @@ public class DataManager {
         }
     }
 
+    public ResultSet getTopSellingBooks(String date) {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.TOP_SELLING_BOOKS);
+            preparedStatement.setString(1, date);
+            System.out.println(preparedStatement.toString());
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public ArrayList<Pair<String,Integer>> getTopFiveCustomers() {
         try {
             preparedStatement = connect.prepareStatement(SqlCommands.TOP_FIVE_CUSTOMERS);

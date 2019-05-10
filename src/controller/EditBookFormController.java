@@ -37,6 +37,8 @@ public class EditBookFormController {
     }
 
     public void editBtnClicked() {
+        editErrorLabel.setText("");
+
         String isbn = isbnTextField.getText();
 
         //delete authors
@@ -71,6 +73,8 @@ public class EditBookFormController {
                 if(DataManager.getInstance().insertAuthor(author, isbn))
                     System.out.println("Author Inserted! " + authorName);
             }
+
+            editErrorLabel.setText("Success!");
         }
         else{
             editErrorLabel.setText("Book cannot be edited!");

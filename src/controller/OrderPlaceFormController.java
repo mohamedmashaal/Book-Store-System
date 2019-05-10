@@ -2,6 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.AccountManager;
 import model.DataManager;
@@ -13,6 +14,7 @@ import java.util.Date;
 public class OrderPlaceFormController {
     public TextField isbnTextField;
     public TextField quantityTextField;
+    public Label notifLabel;
 
 
     public void orderBtnClicked() {
@@ -27,6 +29,10 @@ public class OrderPlaceFormController {
 
         if(orderID != null){
             DataManager.getInstance().insertOrderDetail(orderID, isbn, quantity);
+            notifLabel.setText("Success!");
+        }
+        else{
+            notifLabel.setText("Failure!");
         }
     }
 }

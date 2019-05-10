@@ -85,6 +85,14 @@ public class SqlCommands {
             "HAVING YEAR(purchase.purchase_time) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) " +
             "AND MONTH(purchase.purchase_time) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
     public static final String LAST_MONTH_TOTAL_SALES = "SELECT SUM(res.sales) as " + SALES + " FROM (" + LAST_MONTH_ALL_SALES + ") res;";
+    public static final String TOP_SELLING_BOOKS = "SELECT " + DBContract.PurchaseDetail.BOOK_ISBN_COLUMN + ", SUM(" + DBContract.PurchaseDetail.QUANTITY_COLUMN + ") TotalQuantity"
+            + " FROM " + DBContract.PURCHASE_DETAIL_TABLE + " d"
+            + " JOIN " + DBContract.PURCHASE_TABLE + " p"
+            + " ON d." + DBContract.PurchaseDetail.PURCHASE_ID_COLUMN + " = p." + DBContract.Purchase.PURCHASE_ID_COLUMN
+            + " WHERE " + DBContract.Purchase.PURCHASE_TIME_COLUMN + " >= ?"
+            + " GROUP BY " + DBContract.PurchaseDetail.BOOK_ISBN_COLUMN
+            + " ORDER BY " + "TotalQuantity"
+            + " DESC LIMIT 10;";
     public static final String TOP_FIVE_CUSTOMERS = "SELECT purchase.user_name, SUM(purchase_detail.quantity) as " + TOTAL_BOOKS + " ,purchase.purchase_time "+
             "FROM purchase " +
             "JOIN purchase_detail ON purchase.purchase_id = purchase_detail.purchase_id " +
@@ -97,6 +105,5 @@ public class SqlCommands {
             "AND MONTH(purchase.purchase_time) = MONTH(CURRENT_DATE)) " +
             "ORDER BY SUM(purchase_detail.quantity) DESC " +
             "LIMIT 5";
-
 }
 

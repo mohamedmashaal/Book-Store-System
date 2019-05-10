@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="views.TopSellingBooksReport"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="397.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TopSellingBooksController">
+
+    <TableView fx:id="topBooksTable" layoutX="9.0" layoutY="8.0" prefHeight="382.0" prefWidth="228.0">
+        <columns>
+            <TableColumn prefWidth="116.0" text="Book ISBN" />
+            <TableColumn prefWidth="105.0" text="Quantity" />
+        </columns>
+    </TableView>
 
 </AnchorPane>
