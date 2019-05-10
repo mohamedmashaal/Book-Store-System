@@ -75,4 +75,19 @@ public class ManagerController {
             System.out.println("Couldn't launch place order form Screen");
         }
     }
+
+    public void confirmOrderBtnClicked() {
+        Parent root;
+
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/confirmOrderForm.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Confirm Order Form");
+            stage.setScene(new Scene(root));
+            stage.show();
+            //controlPanelButton.getScene().getWindow().hide();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch confirm order form Screen");
+        }
+    }
 }

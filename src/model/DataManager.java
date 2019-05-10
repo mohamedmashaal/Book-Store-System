@@ -507,5 +507,49 @@ public class DataManager {
             return false;
         }
     }
+
+    public ResultSet getJoinedOrders(){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.GET_JOINED_ORDERS);
+            System.out.println(preparedStatement.toString());
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean deleteOrder(String id, String username){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.DELETE_ORDER);
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, username);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteOrderDetail(String id, String isbn){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.DELETE_ORDER_DETAIL);
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, isbn);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean addToAvailQuantity(String isbn, String value){
+        return true;
+    }
+
 }
 

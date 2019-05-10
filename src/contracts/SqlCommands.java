@@ -58,5 +58,15 @@ public class SqlCommands {
             " WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
     public static final String INSERT_ORDER = "INSERT INTO " + DBContract.ORDER_TABLE + "(" + DBContract.Order.USER_NAME_COLUMN + "," + DBContract.Order.ORDER_TIME_COLUMN + ")" + " VALUES(?, ?);";
     public static final String INSERT_ORDER_DETAIL = "INSERT INTO " + DBContract.ORDER_DETAIL_TABLE + " VALUES(?, ?, ?);";;
+    public static final String GET_JOINED_ORDERS = "SELECT " +
+            " o." + DBContract.Order.ORDER_ID_COLUMN + ", " + DBContract.Order.USER_NAME_COLUMN + ", " +
+            DBContract.Order.ORDER_TIME_COLUMN + ", " + DBContract.OrderDetail.BOOK_ISBN_COLUMN + ", " +
+            DBContract.OrderDetail.QUANTITY_COLUMN
+            + " FROM " + DBContract.ORDER_TABLE
+            + " o JOIN " + DBContract.ORDER_DETAIL_TABLE + " d ON o." + DBContract.Order.ORDER_ID_COLUMN + " = d." + DBContract.OrderDetail.ORDER_ID_COLUMN + ";";
+    public static final String DELETE_ORDER = "DELETE FROM " + DBContract.ORDER_TABLE + " WHERE " + DBContract.Order.ORDER_ID_COLUMN + " = ? AND " + DBContract.Order.USER_NAME_COLUMN + " = ?;";
+    public static final String DELETE_ORDER_DETAIL = "DELETE FROM " + DBContract.ORDER_DETAIL_TABLE + " WHERE " + DBContract.OrderDetail.ORDER_ID_COLUMN + " = ? AND " + DBContract.OrderDetail.BOOK_ISBN_COLUMN + " = ?;";
+    public static final String INCREASE_BOOK_AVAILABLE = "UPDATE " + DBContract.BOOK_TABLE + " SET " +
+            DBContract.Book.AVAILABLE_COLUMN + " = " + DBContract.Book.AVAILABLE_COLUMN + " + ? WHERE " + DBContract.Book.ISBN_COLUMN + " = ?;";
 }
 
