@@ -2,6 +2,7 @@ package contracts;
 
 public class SqlCommands {
     public static final String SALES = "total_sales";
+    public static final String TOTAL_BOOKS = "books";
     public static final String SEARCH_USERNAME = "SELECT " + DBContract.User.USER_NAME_COLUMN +
             " FROM " + DBContract.USER_TABLE +" WHERE " +  DBContract.User.USER_NAME_COLUMN  + " = ?;";
     public static final String GET_PASSWORD = "SELECT " + DBContract.User.PASSWORD_COLUMN +
@@ -84,5 +85,18 @@ public class SqlCommands {
             "HAVING YEAR(purchase.purchase_time) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) " +
             "AND MONTH(purchase.purchase_time) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
     public static final String LAST_MONTH_TOTAL_SALES = "SELECT SUM(res.sales) as " + SALES + " FROM (" + LAST_MONTH_ALL_SALES + ") res;";
+    public static final String TOP_FIVE_CUSTOMERS = "SELECT purchase.user_name, SUM(purchase_detail.quantity) as " + TOTAL_BOOKS + " ,purchase.purchase_time "+
+            "FROM purchase " +
+            "JOIN purchase_detail ON purchase.purchase_id = purchase_detail.purchase_id " +
+            "GROUP BY purchase.user_name " +
+            "HAVING (YEAR(purchase.purchase_time) = YEAR(CURRENT_DATE - INTERVAL 2 MONTH) " +
+            "AND MONTH(purchase.purchase_time) = MONTH(CURRENT_DATE - INTERVAL 2 MONTH)) " +
+            "OR (YEAR(purchase.purchase_time) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) " +
+            "AND MONTH(purchase.purchase_time) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)) " +
+            "OR (YEAR(purchase.purchase_time) = YEAR(CURRENT_DATE) " +
+            "AND MONTH(purchase.purchase_time) = MONTH(CURRENT_DATE)) " +
+            "ORDER BY SUM(purchase_detail.quantity) DESC " +
+            "LIMIT 5";
+
 }
 

@@ -3,6 +3,7 @@ package model;
 import com.mysql.cj.xdevapi.SqlStatement;
 import contracts.DBContract;
 import contracts.SqlCommands;
+import javafx.util.Pair;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -600,6 +601,21 @@ public class DataManager {
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    public ArrayList<Pair<String,Integer>> getTopFiveCustomers() {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.TOP_FIVE_CUSTOMERS);
+            resultSet = preparedStatement.executeQuery();
+            ArrayList<Pair<String, Integer>> users = new ArrayList<>();
+            while (resultSet.next()) {
+                users.add(new Pair<>(resultSet.getString(DBContract.Purchase.USER_NAME_COLUMN), resultSet.getInt(SqlCommands.TOTAL_BOOKS)));
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 }
