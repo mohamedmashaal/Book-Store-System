@@ -23,6 +23,7 @@ public class DataManager {
             // Setup the connection with the DB
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/" + DBContract.DB_NAME, DBContract.DB_USERNAME, DBContract.DB_PASSWORD);
+            connect.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -233,7 +234,6 @@ public class DataManager {
     public void insertPurchase(ArrayList<String> parameters, HashMap<Book, Integer> orders) {
         try {
 
-            connect.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             connect.setAutoCommit(false);
             PreparedStatement purchaseStatment = connect.prepareStatement(SqlCommands.INSERT_PURCHASE);
             PreparedStatement purchaseDetailsStatement = connect.prepareStatement(SqlCommands.INSERT_PURCHASE_DETAILS);

@@ -53,7 +53,7 @@ public class customerController {
         ResultSet resultSet = DataManager.getInstance().getAllBook();
         TitleField.setText("bad book");
         showDatainTableView(resultSet);
-        ExpireDateField.setText("2006-05-03");
+        ExpireDateField.setText("2006-01-00");
 
     }
 
