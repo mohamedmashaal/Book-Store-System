@@ -72,8 +72,17 @@ public class ConfirmOrderFormController {
             ArrayList<String> list = (ArrayList<String>) (ordersTable.getItems().get(rowIndex-1));
             System.out.println(list.toString());
 
+            String id = list.get(1);
+            String username = list.get(2);
+            String isbn = list.get(4);
+            String value = list.get(5);
 
+            DataManager.getInstance().deleteOrderDetail(id, isbn);
+            DataManager.getInstance().deleteOrder(id, username);
 
+            DataManager.getInstance().addToAvailQuantity(isbn, value);
+
+            initialize();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
