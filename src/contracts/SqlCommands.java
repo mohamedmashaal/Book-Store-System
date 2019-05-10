@@ -84,5 +84,13 @@ public class SqlCommands {
             "HAVING YEAR(purchase.purchase_time) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) " +
             "AND MONTH(purchase.purchase_time) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
     public static final String LAST_MONTH_TOTAL_SALES = "SELECT SUM(res.sales) as " + SALES + " FROM (" + LAST_MONTH_ALL_SALES + ") res;";
+    public static final String TOP_SELLING_BOOKS = "SELECT " + DBContract.PurchaseDetail.BOOK_ISBN_COLUMN + ", SUM(" + DBContract.PurchaseDetail.QUANTITY_COLUMN + ") TotalQuantity"
+            + " FROM " + DBContract.PURCHASE_DETAIL_TABLE + " d"
+            + " JOIN " + DBContract.PURCHASE_TABLE + " p"
+            + " ON d." + DBContract.PurchaseDetail.PURCHASE_ID_COLUMN + " = p." + DBContract.Purchase.PURCHASE_ID_COLUMN
+            + " WHERE " + DBContract.Purchase.PURCHASE_TIME_COLUMN + " >= ?"
+            + " GROUP BY " + DBContract.PurchaseDetail.BOOK_ISBN_COLUMN
+            + " ORDER BY " + "TotalQuantity"
+            + " DESC LIMIT 10;";
 }
 

@@ -602,4 +602,16 @@ public class DataManager {
             return 0;
         }
     }
+
+    public ResultSet getTopSellingBooks(String date){
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.TOP_SELLING_BOOKS);
+            preparedStatement.setString(1, date);
+            System.out.println(preparedStatement.toString());
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
