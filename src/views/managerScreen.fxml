@@ -4,14 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="196.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManagerController">
+<AnchorPane prefHeight="196.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManagerController">
    <children>
       <Label fx:id="welcomeLabel" layoutX="73.0" layoutY="185.0" />
-      <Button fx:id="addBookBtn" onAction="#addBookClicked" layoutX="73.0" layoutY="37.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Add Book" />
-      <Button fx:id="editBookBtn" onAction="#editBookClicked" layoutX="269.0" layoutY="37.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Edit Book" />
-      <Button fx:id="placeOrderBtn" onAction="#placeOrderBtnClikced" layoutX="73.0" layoutY="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Place Order" />
-      <Button fx:id="confirmOrderBtn" onAction="#confirmOrderBtnClicked" layoutX="269.0" layoutY="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Confirm Order" />
-      <Button fx:id="promoteUserBtn" onAction="#promoteUserClicked" layoutX="73.0" layoutY="143.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Promote User" />
-      <Button fx:id="viewReportsBtn" layoutX="269.0" layoutY="143.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="View Reports" />
+      <Button fx:id="addBookBtn" layoutX="73.0" layoutY="37.0" mnemonicParsing="false" onAction="#addBookClicked" prefHeight="31.0" prefWidth="166.0" text="Add Book" />
+      <Button fx:id="editBookBtn" layoutX="269.0" layoutY="37.0" mnemonicParsing="false" onAction="#editBookClicked" prefHeight="31.0" prefWidth="166.0" text="Edit Book" />
+      <Button fx:id="placeOrderBtn" layoutX="73.0" layoutY="90.0" mnemonicParsing="false" onAction="#placeOrderBtnClikced" prefHeight="31.0" prefWidth="166.0" text="Place Order" />
+      <Button fx:id="confirmOrderBtn" layoutX="269.0" layoutY="90.0" mnemonicParsing="false" onAction="#confirmOrderBtnClicked" prefHeight="31.0" prefWidth="166.0" text="Confirm Order" />
+      <Button fx:id="promoteUserBtn" layoutX="73.0" layoutY="143.0" mnemonicParsing="false" onAction="#promoteUserClicked" prefHeight="31.0" prefWidth="166.0" text="Promote User" />
+      <Button fx:id="viewReportsBtn" layoutX="269.0" layoutY="143.0" mnemonicParsing="false" onAction="#viewReports" prefHeight="31.0" prefWidth="166.0" text="View Reports" />
    </children>
 </AnchorPane>

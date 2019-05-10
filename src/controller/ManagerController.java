@@ -1,8 +1,10 @@
 package controller;
 
+import contracts.Screens;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -88,6 +90,19 @@ public class ManagerController {
             //controlPanelButton.getScene().getWindow().hide();
         }catch (java.io.IOException exception){
             System.out.println("Couldn't launch confirm order form Screen");
+        }
+    }
+
+    public void viewReports(ActionEvent event){
+        Parent root;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/reportsScreen.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle(Screens.REPORTS_SCREEN);
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (java.io.IOException exception){
+            System.out.println("Couldn't launch reports Screen");
         }
     }
 }

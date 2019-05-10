@@ -588,4 +588,18 @@ public class DataManager {
         }
     }
 
+    public double getLastMonthTotalSales() {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.LAST_MONTH_TOTAL_SALES);
+            resultSet = preparedStatement.executeQuery();
+            double totalSales = 0;
+            while (resultSet.next()) {
+                totalSales = resultSet.getDouble(SqlCommands.SALES);
+            }
+            return totalSales;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

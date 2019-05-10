@@ -1,6 +1,7 @@
 package contracts;
 
 public class SqlCommands {
+    public static final String SALES = "total_sales";
     public static final String SEARCH_USERNAME = "SELECT " + DBContract.User.USER_NAME_COLUMN +
             " FROM " + DBContract.USER_TABLE +" WHERE " +  DBContract.User.USER_NAME_COLUMN  + " = ?;";
     public static final String GET_PASSWORD = "SELECT " + DBContract.User.PASSWORD_COLUMN +
@@ -76,5 +77,12 @@ public class SqlCommands {
             DBContract.User.PASSWORD_COLUMN + "=?," +  DBContract.User.FIRST_NAME_COLUMN + "=?," + DBContract.User.LAST_NAME_COLUMN + "=?," +
             DBContract.User.PHONE_COLUMN + "=?," + DBContract.User.ADDRESS_COLUMN + "=?," + DBContract.User.CREDENTIAL_COLUMN + "=?," +
             DBContract.User.EMAIL_COLUMN + "=?" + " WHERE " + DBContract.User.USER_NAME_COLUMN + " = ?;";
+    public static final String LAST_MONTH_ALL_SALES = "SELECT (book.selling_price * purchase_detail.quantity) AS sales, purchase.purchase_time "+
+            "FROM book " +
+            "JOIN purchase_detail ON book.isbn = purchase_detail.book_isbn " +
+            "JOIN purchase ON purchase_detail.purchase_id = purchase.purchase_id " +
+            "HAVING YEAR(purchase.purchase_time) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) " +
+            "AND MONTH(purchase.purchase_time) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+    public static final String LAST_MONTH_TOTAL_SALES = "SELECT SUM(res.sales) as " + SALES + " FROM (" + LAST_MONTH_ALL_SALES + ") res;";
 }
 
