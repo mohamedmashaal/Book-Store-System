@@ -3,6 +3,7 @@ package model;
 import com.mysql.cj.xdevapi.SqlStatement;
 import contracts.DBContract;
 import contracts.SqlCommands;
+import javafx.util.Pair;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class DataManager {
             // Setup the connection with the DB
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/" + DBContract.DB_NAME, DBContract.DB_USERNAME, DBContract.DB_PASSWORD);
+            connect.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -232,7 +234,6 @@ public class DataManager {
     public void insertPurchase(ArrayList<String> parameters, HashMap<Book, Integer> orders) {
         try {
 
-            connect.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             connect.setAutoCommit(false);
             PreparedStatement purchaseStatment = connect.prepareStatement(SqlCommands.INSERT_PURCHASE);
             PreparedStatement purchaseDetailsStatement = connect.prepareStatement(SqlCommands.INSERT_PURCHASE_DETAILS);
@@ -603,7 +604,7 @@ public class DataManager {
         }
     }
 
-    public ResultSet getTopSellingBooks(String date){
+    public ResultSet getTopSellingBooks(String date) {
         try {
             preparedStatement = connect.prepareStatement(SqlCommands.TOP_SELLING_BOOKS);
             preparedStatement.setString(1, date);
@@ -612,6 +613,21 @@ public class DataManager {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public ArrayList<Pair<String,Integer>> getTopFiveCustomers() {
+        try {
+            preparedStatement = connect.prepareStatement(SqlCommands.TOP_FIVE_CUSTOMERS);
+            resultSet = preparedStatement.executeQuery();
+            ArrayList<Pair<String, Integer>> users = new ArrayList<>();
+            while (resultSet.next()) {
+                users.add(new Pair<>(resultSet.getString(DBContract.Purchase.USER_NAME_COLUMN), resultSet.getInt(SqlCommands.TOTAL_BOOKS)));
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 }

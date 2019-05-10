@@ -36,8 +36,8 @@ public class loginController {
 
     @FXML
     private void initialize(){
-        userNameField.setText("shazly");
-        passwordField.setText("1234");
+        userNameField.setText("admin");
+        passwordField.setText("admin");
     }
 
     @FXML

@@ -62,6 +62,7 @@ public class reportsScreenController {
             stage.show();
             ((Node)(event.getSource())).getScene().getWindow().hide();
         }catch (java.io.IOException exception){
+            exception.printStackTrace();
             System.out.println("Couldn't launch Top Customers Screen");
         }
     }
