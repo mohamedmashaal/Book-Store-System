@@ -230,7 +230,7 @@ public class DataManager {
     }
 
 
-    public void insertPurchase(ArrayList<String> parameters, HashMap<Book, Integer> orders) {
+    public boolean insertPurchase(ArrayList<String> parameters, HashMap<Book, Integer> orders) {
         try {
 
             connect.setAutoCommit(false);
@@ -257,15 +257,18 @@ public class DataManager {
                 System.err.print("Transaction is being rolled back");
                 connect.rollback();
             } catch (SQLException excep) {
+                return false;
             }
-
+            return false;
         } finally {
             try {
                 connect.setAutoCommit(true);
             } catch (SQLException e) {
                 e.printStackTrace();
+                return false;
             }
         }
+        return true;
     }
 
 

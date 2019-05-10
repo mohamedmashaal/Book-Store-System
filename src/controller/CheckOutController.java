@@ -1,6 +1,7 @@
 package controller;
 
 import contracts.Users;
+import javafx.scene.control.Label;
 import model.AccountManager;
 import model.Book;
 import model.DataManager;
@@ -14,12 +15,13 @@ public class CheckOutController {
     HashMap<Book, Integer> orders = new HashMap<>();
     String crediCardNumber;
     String cvv, expireDate;
-
-    public CheckOutController(final HashMap<Book, Integer> orders, final String crediCardNumber, final String cvv, final String expireDate) {
+    Label done;
+    public CheckOutController(final HashMap<Book, Integer> orders, final String crediCardNumber, final String cvv, final String expireDate, Label done) {
         this.orders = orders;
         this.crediCardNumber = crediCardNumber;
         this.cvv = cvv;
         this.expireDate = expireDate;
+        done = done;
     }
     public void checkOut(){
         ArrayList<String> parametes = new ArrayList<String>();
@@ -30,6 +32,11 @@ public class CheckOutController {
         parametes.add(crediCardNumber);
         parametes.add(cvv);
         parametes.add(expireDate);
-        DataManager.getInstance().insertPurchase(parametes, orders);
+        boolean done = DataManager.getInstance().insertPurchase(parametes, orders);
+        if(done){
+            this.done.setText("Purchase done");
+        }
+        else
+            this.done.setText("Failed To Check Out.... Please Try again");
     }
 }

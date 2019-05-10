@@ -179,9 +179,8 @@ public class customerController {
     public void CheckOut(final ActionEvent actionEvent) {
         resetErrorLabel(errorLabelVisa);
         if(nonEmpty() && followPattern()){
-            CheckOutController checkOutController = new CheckOutController(CardController.bookQuantityHashMap, CreditNumberField.getText(), CVVField.getText(), getDate(ExpireDateField.getText()));
+            CheckOutController checkOutController = new CheckOutController(CardController.bookQuantityHashMap, CreditNumberField.getText(), CVVField.getText(), getDate(ExpireDateField.getText()), testLabel);
             checkOutController.checkOut();
-            testLabel.setText("Purchase Done");
         }
         else{
             setErrorLabel("Check Credit Card Info", errorLabelVisa);
