@@ -131,10 +131,10 @@ public class CardController {
         bookQuantityHashMap.put(book, bookQuantityHashMap.get(book) + 1);
         HBox hBox = bookHBoxHashMap.get(book);
         Label quantityString  = (Label) hBox.getChildren().get(5);
-        quantityString.setText(String.valueOf(Double.valueOf(quantityString.getText()) + 1));
+        quantityString.setText(String.valueOf(Integer.valueOf(quantityString.getText()) + 1));
         Label totalPrice  = (Label) hBox.getChildren().get(7);
         totalPruschase += Double.valueOf(book.getSellingPrice());
-        totalPrice.setText(String.valueOf(Double.valueOf(book.getSellingPrice()) * Double.valueOf(quantityString.getText()) + 1));
+        totalPrice.setText(String.valueOf(Double.valueOf(book.getSellingPrice()) * bookQuantityHashMap.get(book)));
         TotalPriceFiels.setText("Total Price:  " + totalPruschase);
 
     }
@@ -144,9 +144,9 @@ public class CardController {
         bookQuantityHashMap.put(book, bookQuantityHashMap.get(book) - 1);
         HBox hBox = bookHBoxHashMap.get(book);
         Label quantityString  = (Label) hBox.getChildren().get(5);
-        quantityString.setText(String.valueOf(Double.valueOf(quantityString.getText()) - 1));
+        quantityString.setText(String.valueOf(Integer.valueOf(quantityString.getText()) - 1));
         Label totalPrice  = (Label) hBox.getChildren().get(7);
-        totalPrice.setText(String.valueOf(Double.valueOf(book.getSellingPrice()) * Double.valueOf(quantityString.getText()) - 1));
+        totalPrice.setText(String.valueOf(Double.valueOf(book.getSellingPrice()) * bookQuantityHashMap.get(book)));
         totalPruschase -= Double.valueOf(book.getSellingPrice());
         TotalPriceFiels.setText("Total Price:  " + totalPruschase);
         if(Double.valueOf(quantityString.getText()) <= 0){
