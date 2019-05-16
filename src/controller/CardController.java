@@ -30,12 +30,10 @@ public class CardController {
         this.selectedRow = selectedRow;
         book = new Book(selectedRow);
         TotalPriceFiels = prices;
-        bookQuantityHashMap.put(book, this.quantity);
     }
 
 
     public void addToCard() {
-
         if(isbnBookHashMap.containsKey(book.getIsbn())){
             book = isbnBookHashMap.get(book.getIsbn());
             totalPruschase -= Double.valueOf(book.getSellingPrice()) * bookQuantityHashMap.get(book);
@@ -43,15 +41,13 @@ public class CardController {
             ((Label)(bookHBoxHashMap.get(book).getChildren().get(7))).setText(String.valueOf(Double.valueOf(book.getSellingPrice()) * this.quantity));
             bookQuantityHashMap.put(book, this.quantity);
             totalPruschase += Double.valueOf(book.getSellingPrice()) * bookQuantityHashMap.get(book);
-
             TotalPriceFiels.setText("Total Price:  " + totalPruschase);
-
             if(this.quantity <= 0){
                 removeOrder(book);
             }
             return;
         }
-
+        bookQuantityHashMap.put(book, this.quantity);
         HBox hbox = new HBox();
 
         Button increase = new Button();
